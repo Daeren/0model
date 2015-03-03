@@ -140,10 +140,10 @@ var $0model = (function createInstance() {
                     if(!schAttributes)
                         throw new Error("[!] 0model: [data] - schema without attributes");
 
-                    //---------]>
-
-                    var schData, oldVal,
+                    var schData, newVal, oldVal,
                         dc = this.__data;
+
+                    //---------]>
 
                     if(arguments.length == 0)
                         return dc;
@@ -159,7 +159,7 @@ var $0model = (function createInstance() {
                             dc[attribute] = runFilter(attribute, rAigis.sanitize(schData.type, name[attribute], schData), schData);
                         }
 
-                        return this;
+                        return dc;
                     }
 
                     if(arguments.length == 1)
@@ -168,12 +168,12 @@ var $0model = (function createInstance() {
                     schData = schAttributes[name];
 
                     oldVal = dc[name];
-                    dc[name] = runFilter(name, rAigis.sanitize(schData.type, typeof(v) === "function" ? v.call(oldVal) : v, schData), schData);
+                    newVal = dc[name] = runFilter(name, rAigis.sanitize(schData.type, typeof(v) === "function" ? v.call(oldVal) : v, schData), schData);
 
                     if(onChangeData)
-                        onChangeData.call(this, name, dc[name], oldVal);
+                        onChangeData.call(this, name, newVal, oldVal);
 
-                    return this;
+                    return newVal;
                 },
 
                 "validate": function(errors) {

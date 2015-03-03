@@ -25,8 +25,9 @@
 | Name        | Desc        | Args			|
 |-------------|-------------|-------------|
 |             | -           ||
-| data        | -  										| (hashTable) or (field, [value]) |
+| data        | Return: data  							| (hashTable) or (field, [value]) |
 | validate    | - 										| (errors [default: false]) |
+|             | -           ||			
 | toJSON      | -  										| ([replacer], [space]) |
 | fromJSON    | -  										| (data) |
 							
