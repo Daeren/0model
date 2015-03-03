@@ -77,7 +77,7 @@ var SUser = {
 
     "attributes": {
         "name":     {"use": "string", "max": 17, "trim": true},
-        "status":   {"use": "string", "min": 50, "max": 60, "scenario": "update"},
+        "status":   {"use": "string", "min": 1, "max": 60, "on": "update"},
         "pts":      {"use": "integer", "max": 50}
     },
 
@@ -118,16 +118,17 @@ console.log("pts:", objUser.data("pts"));
 console.log("data:", objUser.data());
 console.log("+----------------------+\n");
 
+console.log("validate:", objUser.validate());
 objUser.data("status", "HP: 69");
 console.log("status:", objUser.data("status"));
 
 objUser.scenario = "update";
 objUser.data("status", "HP: 13");
 console.log("status:", objUser.data("status"));
+console.log("validate:", objUser.validate());
 console.log("+----------------------+\n");
 
 console.log("getName:", objUser.getName());
-console.log("validate:", objUser.validate());
 ```
 
 
