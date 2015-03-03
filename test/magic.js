@@ -9,7 +9,7 @@
 
 //-----------------------------------------------------
 
-var rZM = require("../index");
+require("../index");
 
 //-----------------------------------------------------
 
@@ -65,11 +65,11 @@ var SUser = {
     }
 };
 
-rZM.model("user", SUser);
+$model("user", SUser);
 
 //--------------------]>
 
-var MUser = rZM.model("user");
+var MUser = $model("user");
 var objUser = MUser({"name": "DT", "pts": "32"});
 
 

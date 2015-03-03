@@ -37,7 +37,7 @@
 * Include: `//raw.githack.com/Daeren/Aigis/master/index.js`
 * Include: `//raw.githack.com/Daeren/0model/master/index.js`
 
-Global var: `$0model`
+Global var: `$model`
 
 
 #### Examples

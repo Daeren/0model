@@ -6,7 +6,7 @@
 //
 //-----------------------------------------------------
 
-var $0model = (function createInstance() {
+var $model = (function createInstance() {
     "use strict";
 
     //-----------------------------]>
@@ -284,5 +284,5 @@ var $0model = (function createInstance() {
 //-----------------------------------------------------
 
 if(typeof(module) == "object") {
-    module.exports = $0model;
+    module.exports = $model.global(true);
 }
