@@ -10,7 +10,7 @@
 
 #### Module
 
-| Name        | Desc        | Args			|
+| Name        | Desc        | Args		  |
 |-------------|-------------|-------------|
 |             | -           ||
 | global      | Set `$model` as Global Var (NodeJS)  				| (v [default: true]) 				|
@@ -19,6 +19,21 @@
 | filter      | Set/Delete custom Filter (Model) 					| (name (String/HashTable), [func]) ~ func(scenario) |
 |             | -           ||			
 | model    	  | -								   					| (name, [schema]) 		|
+
+
+#### Schema
+
+| Name          | Desc          | Val		  |
+| ------------- |:-------------:|-------------|
+|               |         EVENTS                ||
+| onCreate      | -  | func() |
+| onChangeData  | -  | func(name, current, original) |
+|               |         OTHER                 ||
+| static      	| -								| String/HashTable |
+| attributes    | -								| String/HashTable |
+| methods       | -								| String/HashTable |
+| filters    	| -								| String/HashTable |
+
 
 #### Instance of model
 

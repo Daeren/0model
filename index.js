@@ -150,10 +150,13 @@ var $model = (function createInstance() {
 
             if(!schFilters || typeof(schFilters) !== "object") schFilters = null;
             else {
+                var filters, fSetFilter;
+
                 for(var attribute in schFilters) {
                     if(!Object.prototype.hasOwnProperty.call(schFilters, attribute)) continue;
 
-                    schFilters[attribute].forEach(function(filter) {
+                    filters = schFilters[attribute];
+                    fSetFilter = function(filter) {
                         if(typeof(filter) !== "string" && typeof(filter) !== "function")
                             return;
 
@@ -161,8 +164,11 @@ var $model = (function createInstance() {
 
                         mdlFiltersStore[attribute] = mdlFiltersStore[attribute] || [];
                         mdlFiltersStore[attribute].push(filter);
-                    });
-                }
+                    };
+
+                    if(Array.isArray(filters))
+                        filters.forEach(fSetFilter); else fSetFilter(filters);
+                 }
             }
 
             if(typeof(evOnCreate) !== "function") evOnCreate = null;
