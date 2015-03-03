@@ -28,6 +28,7 @@
 | data        | Always returns only the data  			| (hashTable) or (field, [value/func]) ~ function([model]) |
 | validate    | - 										| (errors [default: false]) |
 |             | -           ||			
+| existMethod | Check existence of the method   		| (name) |
 | toJSON      | -  										| ([replacer], [space]) |
 | fromJSON    | -  										| (data) |
 							

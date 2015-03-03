@@ -61,7 +61,7 @@ var $model = (function createInstance() {
             if(!schema || typeof(schema) !== "object")
                 return null;
 
-            //---------------]>
+            //--------[INIT]--------}>
 
             var schStatic       = schema.static,
                 schAttributes   = schema.attributes,
@@ -131,16 +131,13 @@ var $model = (function createInstance() {
                 return data;
             }
 
-            //---------------]>
+            //--------[BUILD: MODEL]--------}>
 
             var resModel = function(data, scenario) {
                 if(schAttributes) {
-                    this.scenario   = scenario;
+                    this.scenario = scenario;
+                    this.data(data && typeof(data) === "object" ? data : {});
                 }
-
-                //---------]>
-
-                this.data(data && typeof(data) === "object" ? data : {});
 
                 if(evOnCreate)
                     evOnCreate.call(this);
@@ -232,8 +229,12 @@ var $model = (function createInstance() {
                     return rAigis.validate(schAttributes, this.__data, opt);
                 },
 
+                "existMethod": function(name) {
+                    return schMethods && schMethods.hasOwnProperty(name);
+                },
+
                 "toJSON": function(replacer, space) {
-                    return JSON.stringify(this.__data, replacer, space);
+                    return JSON.stringify(this.data(), replacer, space);
                 },
 
                 "fromJSON": function(data) {
@@ -257,16 +258,18 @@ var $model = (function createInstance() {
 
             //--------)>
 
-            for(var method in schMethods) {
-                if(!Object.prototype.hasOwnProperty.call(schMethods, method)) continue;
+            if(schMethods) {
+                for(var method in schMethods) {
+                    if(!Object.prototype.hasOwnProperty.call(schMethods, method)) continue;
 
-                if(["data", "validate"].indexOf(method) !== -1)
-                    throw new Error("[!] 0model: Cannot redefine property: " + method);
+                    if(["data", "validate"].indexOf(method) !== -1)
+                        throw new Error("[!] 0model: Cannot redefine property: " + method);
 
-                resModel.prototype[method] = schMethods[method];
+                    resModel.prototype[method] = schMethods[method];
+                }
             }
 
-            //---------------]>
+            //--------[BUILD: MODEL-CONSTRUCTOR]--------}>
 
             var result = function(data, scenario) {
                 return new resModel(data, scenario);
