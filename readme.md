@@ -25,7 +25,7 @@
 | Name        | Desc        | Args			|
 |-------------|-------------|-------------|
 |             | -           ||
-| data        | Always returns only the data  			| (hashTable) or (field, [value]) |
+| data        | Always returns only the data  			| (hashTable) or (field, [value/func]) ~ function([model]) |
 | validate    | - 										| (errors [default: false]) |
 |             | -           ||			
 | toJSON      | -  										| ([replacer], [space]) |

@@ -179,7 +179,7 @@ var $0model = (function createInstance() {
                     schData = schAttributes[name];
 
                     oldVal = dc[name];
-                    newVal = dc[name] = runFilter(name, rAigis.sanitize(schData.type, typeof(v) === "function" ? v.call(oldVal) : v, schData), schData);
+                    newVal = dc[name] = runFilter(name, rAigis.sanitize(schData.type, typeof(v) === "function" ? v.call(oldVal, this) : v, schData), schData);
 
                     if(onChangeData)
                         onChangeData.call(this, name, newVal, oldVal);

@@ -17,7 +17,7 @@ var SUser = {
     "onCreate": function() {
         console.log("model: onCreate");
 
-        this.data("pts", function() {
+        this.data("pts", function(model) {
             return this + 100;
         });
     },
