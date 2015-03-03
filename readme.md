@@ -43,7 +43,7 @@ Global var: `$model`
 #### Examples
 
 ```js
-var rZM = require("0model");
+require("0model");
 
 //-----------------------------------------------------
 
@@ -99,11 +99,11 @@ var SUser = {
     }
 };
 
-rZM.model("user", SUser);
+$model("user", SUser);
 
 //--------------------]>
 
-var MUser = rZM.model("user");
+var MUser = $model("user");
 var objUser = MUser({"name": "DT", "pts": "32"});
 
 
