@@ -73,18 +73,24 @@ var MUser = rZM.model("user");
 var objUser = MUser({"name": "DT", "pts": "32"});
 
 
-console.log(MUser.saltSeed);
-console.log(MUser.genSalt());
+console.log("+----------------------+\n");
+
+console.log("saltSeed:", MUser.saltSeed);
+console.log("genSalt:", MUser.genSalt());
+console.log("+----------------------+\n");
 
 console.log("name:", objUser.data("name"));
 console.log("pts:", objUser.data("pts"));
-console.log(objUser.data());
+console.log("data:", objUser.data());
+console.log("+----------------------+\n");
 
 objUser.data("status", "HP: 69");
 console.log("status:", objUser.data("status"));
+
 objUser.scenario = "update";
 objUser.data("status", "HP: 13");
 console.log("status:", objUser.data("status"));
+console.log("+----------------------+\n");
 
 console.log("getName:", objUser.getName());
 console.log("validate:", objUser.validate());
