@@ -133,9 +133,11 @@ var $0model = (function createInstance() {
 
             //---------------]>
 
-            var result = function(data, scenario) {
-                if(schMethods)
-                    this.__data = rAigis.sanitize(schAttributes, {});
+            var resModel = function(data, scenario) {
+                if(schAttributes) {
+                    this.__data     = rAigis.sanitize(schAttributes, {});
+                    this.scenario   = scenario;
+                }
 
                 //---------]>
 
@@ -146,18 +148,21 @@ var $0model = (function createInstance() {
                     evOnCreate.call(this);
             };
 
-            result.prototype = {
+            resModel.prototype = {
                 "data": function(name, v) {
                     if(!schAttributes)
                         throw new Error("[!] 0model: [data] - schema without attributes");
 
                     var schData, newVal, oldVal,
-                        dc = this.__data;
+                        dc = this.__data,
+                        sc = this.scenario;
 
                     //---------]>
 
                     if(arguments.length == 0)
                         return dc;
+
+                    //---------]>
 
                     if(name && typeof(name) === "object") {
                         for(var attribute in schAttributes) {
@@ -167,16 +172,31 @@ var $0model = (function createInstance() {
                             ) continue;
 
                             schData = schAttributes[attribute];
-                            dc[attribute] = runFilter(attribute, rAigis.sanitize(schData.type, name[attribute], schData), schData);
+
+                            if(typeof(schData.scenario) !== "undefined" && sc != schData.scenario)
+                                continue;
+
+                            oldVal = dc[attribute];
+                            newVal = dc[attribute] = runFilter(attribute, rAigis.sanitize(schData.type, name[attribute], schData), schData);
+
+                            if(onChangeData)
+                                onChangeData.call(this, attribute, newVal, oldVal);
                         }
 
                         return dc;
                     }
 
+                    //---------]>
+
                     if(arguments.length == 1)
                         return dc[name];
 
+                    //---------]>
+
                     schData = schAttributes[name];
+
+                    if(typeof(schData.scenario) !== "undefined" && sc != schData.scenario)
+                        return;
 
                     oldVal = dc[name];
                     newVal = dc[name] = runFilter(name, rAigis.sanitize(schData.type, typeof(v) === "function" ? v.call(oldVal, this) : v, schData), schData);
@@ -227,26 +247,26 @@ var $0model = (function createInstance() {
                 if(["data", "validate"].indexOf(method) !== -1)
                     throw new Error("[!] 0model: Cannot redefine property: " + method);
 
-                result.prototype[method] = schMethods[method];
+                resModel.prototype[method] = schMethods[method];
             }
 
             //---------------]>
 
-            var resModel = function(data, scenario) {
-                return new result(data, scenario);
+            var result = function(data, scenario) {
+                return new resModel(data, scenario);
             };
 
             if(schStatic) {
                 for(var field in schStatic) {
                     if(!Object.prototype.hasOwnProperty.call(schStatic, field)) continue;
 
-                    resModel[field] = schStatic[field];
+                    result[field] = schStatic[field];
                 }
             }
 
-            Object.freeze(resModel);
+            Object.freeze(result);
 
-            return gModelStore[name] = resModel;
+            return gModelStore[name] = result;
         }
     };
 

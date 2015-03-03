@@ -43,7 +43,7 @@ var SUser = {
 
     "attributes": {
         "name":     {"use": "string", "max": 17, "trim": true},
-        "status":   {"use": "?string", "max": 60},
+        "status":   {"use": "?string", "max": 60, "scenario": "update"},
         "pts":      {"use": "integer", "max": 50}
     },
 
@@ -76,9 +76,15 @@ var objUser = MUser({"name": "DT", "pts": "32"});
 console.log(MUser.saltSeed);
 console.log(MUser.genSalt());
 
-console.log(objUser.data("name"));
-console.log(objUser.data("pts"));
+console.log("name:", objUser.data("name"));
+console.log("pts:", objUser.data("pts"));
 console.log(objUser.data());
 
-console.log(objUser.getName());
-console.log(objUser.validate());
+objUser.data("status", "HP: 69");
+console.log("status:", objUser.data("status"));
+objUser.scenario = "update";
+objUser.data("status", "HP: 13");
+console.log("status:", objUser.data("status"));
+
+console.log("getName:", objUser.getName());
+console.log("validate:", objUser.validate());
