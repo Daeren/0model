@@ -29,6 +29,8 @@ var SUser = {
         console.log("%s is now %s", name, current);
     },
 
+    //---------]>
+
     "attributes": {
         "name":     {"use": "string", "max": 17, "trim": true},
         "status":   {"use": "?string", "max": 60},
@@ -64,3 +66,4 @@ console.log(objUser.data("name"));
 console.log(objUser.data("pts"));
 console.log(objUser.data());
 console.log(objUser.getName());
+console.log(objUser.validate());

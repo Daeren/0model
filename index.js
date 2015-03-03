@@ -2,7 +2,7 @@
 //
 // Author: Daeren Torn
 // Site: 666.io
-// Version: 0.00.011
+// Version: 0.00.01
 //
 //-----------------------------------------------------
 
@@ -144,8 +144,8 @@ var $0model = (function createInstance() {
 
             result.prototype = {
                 "data": function(name, v) {
-                    if(!schMethods)
-                        throw new Error("[!] 0model: schema without attributes");
+                    if(!schAttributes)
+                        throw new Error("[!] 0model: [data] - schema without attributes");
 
                     //---------]>
 
@@ -181,6 +181,15 @@ var $0model = (function createInstance() {
                         onChangeData.call(this, name, dc[name], oldVal);
 
                     return this;
+                },
+
+                "validate": function(errors) {
+                    if(!schAttributes)
+                        throw new Error("[!] 0model: [validate] - schema without attributes");
+
+                    //---------]>
+
+                    return rAigis.validate(schAttributes, this.__data, errors ? {"errors": true} : undefined);
                 }
             };
 
@@ -189,7 +198,7 @@ var $0model = (function createInstance() {
             for(var method in schMethods) {
                 if(!Object.prototype.hasOwnProperty.call(schMethods, method)) continue;
 
-                if(["data"].indexOf(method) !== -1)
+                if(["data", "validate"].indexOf(method) !== -1)
                     throw new Error("[!] 0model: Cannot redefine property: " + method);
 
                 result.prototype[method] = schMethods[method];
