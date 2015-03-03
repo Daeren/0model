@@ -53,6 +53,20 @@ var SUser = {
         "getName": function() {
             return "User name: " + this.data("name");
         }
+    },
+
+    "filters": {
+        "name": [
+            "myTestFilterName0",
+
+            function myTestFilterName1(scenario) {
+                return this + "|";
+            },
+
+            function myTestFilterName2(scenario) {
+                return this + "FilterName]";
+            }
+        ]
     }
 };
 
