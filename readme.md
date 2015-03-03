@@ -52,8 +52,8 @@ var SUser = {
     "onCreate": function() {
         console.log("model: onCreate");
 
-        this.data("pts", function(model) {
-            return this + 100;
+        this.data("pts", function(obj) {
+            return this * obj.data("pts");
         });
     },
 
@@ -88,20 +88,6 @@ var SUser = {
         "getName": function() {
             return "User name: " + this.data("name");
         }
-    },
-
-    "filters": {
-        "name": [
-            "myTestFilterName0",
-
-            function myTestFilterName1(scenario) {
-                return this + "|";
-            },
-
-            function myTestFilterName2(scenario) {
-                return this + "FilterName]";
-            }
-        ]
     }
 };
 
@@ -143,6 +129,42 @@ console.log("validate:", objUser.validate());
 console.log("+----------------------+\n");
 
 console.log("getName:", objUser.getName());
+
+/*
+//_ OUTPUT:
+
+model: onCreate
+model: onChangeData
+pts was 32
+pts is now 50
++----------------------+
+
+saltSeed: 157efe#
++----------------------+
+
+name: DT
+pts: 50
+data: { name: 'DT', pts: 50 }
++----------------------+
+
+pswdSalt: undefined
+model: onChangeData
+pswdSalt was undefined
+pswdSalt is now 157efe#19ffggt2u
+pswdSalt: 157efe#19ffggt2u
++----------------------+
+
+validate: true
+status: undefined
+model: onChangeData
+status was undefined
+status is now HP: 13
+status: HP: 13
+validate: true
++----------------------+
+
+getName: User name: DT
+*/
 ```
 
 
