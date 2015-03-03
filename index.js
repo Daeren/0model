@@ -244,6 +244,8 @@ var $0model = (function createInstance() {
                 }
             }
 
+            Object.freeze(resModel);
+
             return gModelStore[name] = resModel;
         }
     };

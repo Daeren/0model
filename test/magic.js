@@ -34,7 +34,6 @@ var SUser = {
     "static": {
         "saltSeed": "157efe#",
 
-        
         "genSalt": function() {
             return this.saltSeed + Date.now().toString(32);
         }
