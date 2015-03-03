@@ -17,7 +17,7 @@
 | type        | Set/Delete custom Type (Sanitize) 					| (name (String/HashTable), [func]) ~ func(input, options) |
 | rule        | Set/Delete custom Rule (Validate) 					| (name (String/HashTable), [func]) ~ func(input, options) |
 |             | -           ||			
-| model    	  | -								   					| (name, [schema] (String/HashTable)) 		|
+| model    	  | -								   					| (name, [schema (String/HashTable)]) 		|
 
 
 #### Model
@@ -51,7 +51,7 @@ var SUser = {
     "onCreate": function() {
         console.log("model: onCreate");
 
-        this.data("pts", function() {
+        this.data("pts", function(model) {
             return this + 100;
         });
     },
@@ -63,9 +63,21 @@ var SUser = {
         console.log("%s is now %s", name, current);
     },
 
+    //---------]>
+
+    "static": {
+        "saltSeed": "157efe#",
+
+        "genSalt": function() {
+            return this.saltSeed + Date.now().toString(32);
+        }
+    },
+
+    //---------]>
+
     "attributes": {
         "name":     {"use": "string", "max": 17, "trim": true},
-        "status":   {"use": "?string", "max": 60},
+        "status":   {"use": "string", "min": 50, "max": 60, "scenario": "update"},
         "pts":      {"use": "integer", "max": 50}
     },
 
@@ -77,10 +89,10 @@ var SUser = {
 
     "filters": {
         "name": [
-            function myTestFilterName1() {
+            function myTestFilterName1(scenario) {
                 return this + " [myTest";
             },
-            function myTestFilterName2() {
+            function myTestFilterName2(scenario) {
                 return this + "FilterName]";
             }
         ]
@@ -94,10 +106,28 @@ rZM.model("user", SUser);
 var MUser = rZM.model("user");
 var objUser = MUser({"name": "DT", "pts": "32"});
 
-console.log(objUser.data("name"));
-console.log(objUser.data("pts"));
-console.log(objUser.data());
-console.log(objUser.getName());
+
+console.log("+----------------------+\n");
+
+console.log("saltSeed:", MUser.saltSeed);
+console.log("genSalt:", MUser.genSalt());
+console.log("+----------------------+\n");
+
+console.log("name:", objUser.data("name"));
+console.log("pts:", objUser.data("pts"));
+console.log("data:", objUser.data());
+console.log("+----------------------+\n");
+
+objUser.data("status", "HP: 69");
+console.log("status:", objUser.data("status"));
+
+objUser.scenario = "update";
+objUser.data("status", "HP: 13");
+console.log("status:", objUser.data("status"));
+console.log("+----------------------+\n");
+
+console.log("getName:", objUser.getName());
+console.log("validate:", objUser.validate());
 ```
 
 
