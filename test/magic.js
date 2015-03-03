@@ -57,9 +57,12 @@ var SUser = {
 
     "filters": {
         "name": [
+            "myTestFilterName0",
+
             function myTestFilterName1(scenario) {
-                return this + " [myTest";
+                return this + "|";
             },
+
             function myTestFilterName2(scenario) {
                 return this + "FilterName]";
             }
@@ -68,6 +71,10 @@ var SUser = {
 };
 
 $model("user", SUser);
+
+$model.filter("myTestFilterName0", function(scenario) {
+    return this + " [myTest";
+});
 
 //--------------------]>
 

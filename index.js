@@ -15,7 +15,35 @@ var $model = (function createInstance() {
 
     //-----------------------------]>
 
-    var gModelStore = {};
+    var gModelStore     = {},
+        gFilterStore    = {};
+
+    //-------[HELPERS]-------}>
+
+    function wFuncStore(name, func, store) {
+        if(name === null)
+            return;
+
+        switch(typeof(name)) {
+            case "string":
+                if(func === null) delete store[name];
+                else if(typeof(func) === "function") store[name] = func;
+
+                break;
+
+            case "object":
+                for(var field in name) {
+                    if(!Object.prototype.hasOwnProperty.call(name, field)) continue;
+
+                    func = name[field];
+
+                    if(func === null) delete store[name];
+                    else if(typeof(func) === "function") store[name] = func;
+                }
+
+                break;
+        }
+    }
 
     //-----------------------------]>
 
@@ -49,6 +77,11 @@ var $model = (function createInstance() {
 
         "rule": function(name, func) {
             rAigis.apply(rAigis, arguments);
+            return this;
+        },
+
+        "filter": function(name, func) {
+            wFuncStore(name, func, gFilterStore);
             return this;
         },
 
@@ -103,7 +136,7 @@ var $model = (function createInstance() {
                     if(!Object.prototype.hasOwnProperty.call(schFilters, attribute)) continue;
 
                     schFilters[attribute].forEach(function(filter) {
-                        if(typeof(filter) !== "function")
+                        if(typeof(filter) !== "string" && typeof(filter) !== "function")
                             return;
 
                         mdlFiltersStore[attribute] = mdlFiltersStore[attribute] || [];
@@ -121,8 +154,17 @@ var $model = (function createInstance() {
                 var filters = mdlFiltersStore[attribute];
 
                 if(filters) {
-                    for(var i = 0, len = filters.length; i < len; i++) {
-                        data = filters[i].call(data, scenario);
+                    for(var f, i = 0, len = filters.length; i < len; i++) {
+                        f = filters[i];
+
+                        if(typeof(f) === "string") {
+                            if(!gFilterStore[f])
+                                throw new Error("[!] 0model: [filter] - not found: " + f);
+
+                            f = gFilterStore[f];
+                        }
+
+                        data = f.call(data, scenario);
                     }
 
                     data = rAigis.sanitize(options.type, data, options);
