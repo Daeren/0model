@@ -135,14 +135,12 @@ var $model = (function createInstance() {
 
             var resModel = function(data, scenario) {
                 if(schAttributes) {
-                    this.__data     = rAigis.sanitize(schAttributes, {});
                     this.scenario   = scenario;
                 }
 
                 //---------]>
 
-                if(data && typeof(data) === "object")
-                    this.data(data);
+                this.data(data && typeof(data) === "object" ? data : {});
 
                 if(evOnCreate)
                     evOnCreate.call(this);
@@ -153,9 +151,16 @@ var $model = (function createInstance() {
                     if(!schAttributes)
                         throw new Error("[!] 0model: [data] - schema without attributes");
 
-                    var schData, newVal, oldVal,
+                    var isInit,
+                        schData, newVal, oldVal,
+
                         dc = this.__data,
                         sc = this.scenario;
+
+                    if(!dc) {
+                        isInit = true;
+                        dc = this.__data = {};
+                    }
 
                     //---------]>
 
@@ -173,13 +178,16 @@ var $model = (function createInstance() {
 
                             schData = schAttributes[attribute];
 
-                            if(typeof(schData.on) !== "undefined" && schData.on != sc)
+                            if(
+                                (isInit && schData.unsafe) ||
+                                (typeof(schData.on) !== "undefined" && schData.on != sc)
+                            )
                                 continue;
 
                             oldVal = dc[attribute];
                             newVal = dc[attribute] = runFilter(attribute, rAigis.sanitize(schData.type, name[attribute], schData), sc, schData);
 
-                            if(onChangeData)
+                            if(!isInit && onChangeData)
                                 onChangeData.call(this, attribute, newVal, oldVal);
                         }
 

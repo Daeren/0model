@@ -44,7 +44,9 @@ var SUser = {
     "attributes": {
         "name":     {"use": "string", "max": 17, "trim": true},
         "status":   {"use": "string", "min": 1, "max": 60, "on": "update"},
-        "pts":      {"use": "integer", "max": 50}
+        "pts":      {"use": "integer", "max": 50},
+
+        "pswdSalt": {"use": "string", "unsafe": true}
     },
 
     "methods": {
@@ -70,18 +72,22 @@ $model("user", SUser);
 //--------------------]>
 
 var MUser = $model("user");
-var objUser = MUser({"name": "DT", "pts": "32"});
+var objUser = MUser({"name": "DT", "pts": "32", "pswdSalt": "+++"});
 
 
 console.log("+----------------------+\n");
 
 console.log("saltSeed:", MUser.saltSeed);
-console.log("genSalt:", MUser.genSalt());
 console.log("+----------------------+\n");
 
 console.log("name:", objUser.data("name"));
 console.log("pts:", objUser.data("pts"));
 console.log("data:", objUser.data());
+console.log("+----------------------+\n");
+
+console.log("pswdSalt:", objUser.data("pswdSalt"));
+objUser.data("pswdSalt", MUser.genSalt());
+console.log("pswdSalt:", objUser.data("pswdSalt"));
 console.log("+----------------------+\n");
 
 console.log("validate:", objUser.validate());
