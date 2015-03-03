@@ -13,6 +13,22 @@
 | Name        | Desc        | Args			|
 |-------------|-------------|-------------|
 |             | -           ||
+| global      | Set `$model` as Global Var (NodeJS)  				| (v [default: false]) 				|
+| type        | Set/Delete custom Type (Sanitize) 					| (name (String/HashTable), [func]) ~ func(input, options) |
+| rule        | Set/Delete custom Rule (Validate) 					| (name (String/HashTable), [func]) ~ func(input, options) |
+|             | -           ||			
+| model    	  | -								   					| (name, [schema] (String/HashTable)) 		|
+
+
+#### Model
+
+| Name        | Desc        | Args			|
+|-------------|-------------|-------------|
+|             | -           ||
+| data        | -  										| (hashTable) or (field, [value]) |
+| validate    | - 										| (errors [default: false]) |
+| toJSON      | -  										| ([replacer], [space]) |
+| fromJSON    | -  										| (data) |
 							
 							
 #### Browser

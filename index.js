@@ -25,25 +25,18 @@ var $0model = (function createInstance() {
                 return this;
 
             if(v) {
-                var gSObj = gExport.sanitize,
-                    gVObj = gExport.validate;
+                var gObj = gExport.model;
 
                 for(var i in gExport) {
                     if(gExport.hasOwnProperty(i))
-                        gSObj[i] = gVObj[i] = gExport[i];
+                        gObj[i] = gExport[i];
                 }
 
-                if(typeof(global.$sanitize) === "undefined")
-                    global.$sanitize = gSObj;
-
-                if(typeof(global.$validate) === "undefined")
-                    global.$validate = gVObj;
+                if(typeof(global.$model) === "undefined")
+                    global.$model = gObj;
             } else {
-                if(global.$sanitize === gExport.sanitize)
-                    delete global.$sanitize;
-
-                if(global.$validate === gExport.validate)
-                    delete global.$validate;
+                if(global.$model === gExport.sanitize)
+                    delete global.$model;
             }
 
             return this;
@@ -190,6 +183,28 @@ var $0model = (function createInstance() {
                     //---------]>
 
                     return rAigis.validate(schAttributes, this.__data, errors ? {"errors": true} : undefined);
+                },
+
+                "toJSON": function(replacer, space) {
+                    return JSON.stringify(this.__data, replacer, space);
+                },
+
+                "fromJSON": function(data) {
+                    if(!data || typeof(data) !== "string")
+                        return this;
+
+                    try {
+                        data = JSON.parse(data);
+                    } catch(e) {
+                        return this;
+                    }
+
+                    if(!data || Array.isArray(data))
+                        return this;
+
+                    this.data(data);
+
+                    return this;
                 }
             };
 
