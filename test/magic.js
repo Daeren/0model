@@ -43,7 +43,7 @@ var SUser = {
 
     "attributes": {
         "name":     {"use": "string", "max": 17, "trim": true},
-        "status":   {"use": "?string", "max": 60, "scenario": "update"},
+        "status":   {"use": "string", "min": 50, "max": 60, "scenario": "update"},
         "pts":      {"use": "integer", "max": 50}
     },
 

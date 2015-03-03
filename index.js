@@ -213,7 +213,15 @@ var $0model = (function createInstance() {
 
                     //---------]>
 
-                    return rAigis.validate(schAttributes, this.__data, errors ? {"errors": true} : undefined);
+                    var opt;
+
+                    if(errors || typeof(this.scenario) !== "undefined")
+                        opt = {
+                            "errors":   errors,
+                            "scenario": this.scenario
+                        };
+
+                    return rAigis.validate(schAttributes, this.__data, opt);
                 },
 
                 "toJSON": function(replacer, space) {
