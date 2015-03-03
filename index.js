@@ -173,7 +173,7 @@ var $model = (function createInstance() {
 
                             schData = schAttributes[attribute];
 
-                            if(typeof(schData.scenario) !== "undefined" && sc != schData.scenario)
+                            if(typeof(schData.on) !== "undefined" && schData.on != sc)
                                 continue;
 
                             oldVal = dc[attribute];
@@ -195,7 +195,7 @@ var $model = (function createInstance() {
 
                     schData = schAttributes[name];
 
-                    if(typeof(schData.scenario) !== "undefined" && sc != schData.scenario)
+                    if(typeof(schData.on) !== "undefined" && schData.on != sc)
                         return;
 
                     oldVal = dc[name];
@@ -218,7 +218,7 @@ var $model = (function createInstance() {
                     if(errors || typeof(this.scenario) !== "undefined")
                         opt = {
                             "errors":   errors,
-                            "scenario": this.scenario
+                            "on":       this.scenario
                         };
 
                     return rAigis.validate(schAttributes, this.__data, opt);
