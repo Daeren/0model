@@ -31,6 +31,17 @@ var SUser = {
 
     //---------]>
 
+    "static": {
+        "saltSeed": "157efe#",
+
+        
+        "genSalt": function() {
+            return this.saltSeed + Date.now().toString(32);
+        }
+    },
+
+    //---------]>
+
     "attributes": {
         "name":     {"use": "string", "max": 17, "trim": true},
         "status":   {"use": "?string", "max": 60},
@@ -62,8 +73,13 @@ rZM.model("user", SUser);
 var MUser = rZM.model("user");
 var objUser = MUser({"name": "DT", "pts": "32"});
 
+
+console.log(MUser.saltSeed);
+console.log(MUser.genSalt());
+
 console.log(objUser.data("name"));
 console.log(objUser.data("pts"));
 console.log(objUser.data());
+
 console.log(objUser.getName());
 console.log(objUser.validate());

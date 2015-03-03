@@ -63,7 +63,8 @@ var $0model = (function createInstance() {
 
             //---------------]>
 
-            var schAttributes   = schema.attributes,
+            var schStatic       = schema.static,
+                schAttributes   = schema.attributes,
                 schMethods      = schema.methods,
                 schFilters      = schema.filters;
 
@@ -74,6 +75,8 @@ var $0model = (function createInstance() {
             var mdlFiltersStore = {};
 
             //------)>
+
+            if(!schStatic || typeof(schStatic) !== "object") schStatic = null;
 
             if(!schAttributes || typeof(schAttributes) !== "object") schAttributes = null;
             else {
@@ -229,9 +232,19 @@ var $0model = (function createInstance() {
 
             //---------------]>
 
-            return gModelStore[name] = function(data, scenario) {
+            var resModel = function(data, scenario) {
                 return new result(data, scenario);
             };
+
+            if(schStatic) {
+                for(var field in schStatic) {
+                    if(!Object.prototype.hasOwnProperty.call(schStatic, field)) continue;
+
+                    resModel[field] = schStatic[field];
+                }
+            }
+
+            return gModelStore[name] = resModel;
         }
     };
 
