@@ -13,7 +13,7 @@
 | Name        | Desc        | Args			|
 |-------------|-------------|-------------|
 |             | -           ||
-| global      | Set `$model` as Global Var (NodeJS)  				| (v [default: false]) 				|
+| global      | Set `$model` as Global Var (NodeJS)  				| (v [default: true]) 				|
 | type        | Set/Delete custom Type (Sanitize) 					| (name (String/HashTable), [func]) ~ func(input, options) |
 | rule        | Set/Delete custom Rule (Validate) 					| (name (String/HashTable), [func]) ~ func(input, options) |
 |             | -           ||			
