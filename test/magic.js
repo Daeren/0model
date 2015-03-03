@@ -55,10 +55,10 @@ var SUser = {
 
     "filters": {
         "name": [
-            function myTestFilterName1() {
+            function myTestFilterName1(scenario) {
                 return this + " [myTest";
             },
-            function myTestFilterName2() {
+            function myTestFilterName2(scenario) {
                 return this + "FilterName]";
             }
         ]
