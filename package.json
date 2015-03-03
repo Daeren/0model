@@ -28,6 +28,10 @@
         "node": ">= 0.8.0"
     },
   
+	"dependencies": {
+		"aigis": "*"
+	},
+	
     "readme": "",
     "readmeFilename": "readme.md",
 
