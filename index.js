@@ -130,9 +130,17 @@ var $0model = (function createInstance() {
 
             //---------------]>
 
-            var result = function() {
+            var result = function(data, scenario) {
                 if(schMethods)
                     this.__data = rAigis.sanitize(schAttributes, {});
+
+                //---------]>
+
+                if(data && typeof(data) === "object")
+                    this.data(data);
+
+                if(evOnCreate)
+                    evOnCreate.call(this);
             };
 
             result.prototype = {
@@ -221,17 +229,8 @@ var $0model = (function createInstance() {
 
             //---------------]>
 
-            return gModelStore[name] = function(data) {
-                var objModel = new result(data);
-
-                if(data && typeof(data) === "object") {
-                    objModel.data(data);
-                }
-
-                if(evOnCreate)
-                    evOnCreate.call(objModel);
-
-                return objModel;
+            return gModelStore[name] = function(data, scenario) {
+                return new result(data, scenario);
             };
         }
     };
