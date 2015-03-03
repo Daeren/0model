@@ -105,7 +105,7 @@ var $model = (function createInstance() {
                 onChangeData    = schema.onChangeData;
 
 
-            var mdlFiltersStore = {};
+            var mdlFiltersStore;
 
             //------)>
 
@@ -139,6 +139,8 @@ var $model = (function createInstance() {
                         if(typeof(filter) !== "string" && typeof(filter) !== "function")
                             return;
 
+                        mdlFiltersStore = mdlFiltersStore || {};
+
                         mdlFiltersStore[attribute] = mdlFiltersStore[attribute] || [];
                         mdlFiltersStore[attribute].push(filter);
                     });
@@ -151,6 +153,9 @@ var $model = (function createInstance() {
             //---------------]>
 
             function runFilter(attribute, data, scenario, options) {
+                if(!mdlFiltersStore)
+                    return data;
+
                 var filters = mdlFiltersStore[attribute];
 
                 if(filters) {
