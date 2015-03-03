@@ -1,0 +1,40 @@
+{
+    "name": "0model",
+    "version": "0.0.1",
+    "description": "Lightweight and Powerful model",
+
+    "homepage": "http://666.io",
+    "keywords": [
+        "validate",
+        "validation",
+        "data",
+		"fundamental",
+        "justdoit"
+    ],
+	
+    "author": {
+        "name": "Daeren Torn",
+        "email": "x@db.gg"
+    },
+
+    "main": "./index",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/Daeren/0model.git"
+    },
+
+    "license": "MIT",
+    "engines": {
+        "node": ">= 0.8.0"
+    },
+  
+    "readme": "",
+    "readmeFilename": "readme.md",
+
+    "bugs": {
+        "url": "https://github.com/Daeren/0model/issues"
+    },
+
+    "_id": "0model@0.0.1",
+    "_from": "0model@"
+}
