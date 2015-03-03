@@ -2,7 +2,7 @@
 //
 // Author: Daeren Torn
 // Site: 666.io
-// Version: 0.00.01
+// Version: 0.00.002
 //
 //-----------------------------------------------------
 
@@ -129,6 +129,24 @@ var $model = (function createInstance() {
             }
 
             if(!schMethods || typeof(schMethods) !== "object") schMethods = null;
+            else {
+                var func,
+                    newObjMethods = {};
+
+                for(var method in schMethods) {
+                    if(!Object.prototype.hasOwnProperty.call(schMethods, method)) continue;
+
+                    if(["data", "validate"].indexOf(method) !== -1)
+                        throw new Error("[!] 0model: Cannot redefine property: " + method);
+
+                    func = schMethods[method];
+
+                    if(typeof(func) === "function")
+                        newObjMethods[method] = func;
+                }
+
+                schMethods = newObjMethods;
+            }
 
             if(!schFilters || typeof(schFilters) !== "object") schFilters = null;
             else {
@@ -276,6 +294,8 @@ var $model = (function createInstance() {
                     return rAigis.validate(schAttributes, this.__data, opt);
                 },
 
+                //-------]>
+
                 "existMethod": function(name) {
                     return schMethods && schMethods.hasOwnProperty(name);
                 },
@@ -308,9 +328,6 @@ var $model = (function createInstance() {
             if(schMethods) {
                 for(var method in schMethods) {
                     if(!Object.prototype.hasOwnProperty.call(schMethods, method)) continue;
-
-                    if(["data", "validate"].indexOf(method) !== -1)
-                        throw new Error("[!] 0model: Cannot redefine property: " + method);
 
                     resModel.prototype[method] = schMethods[method];
                 }

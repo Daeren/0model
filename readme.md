@@ -18,9 +18,9 @@
 | rule        | Set/Delete custom Rule (Validate) 					| (name (String/HashTable), [func]) ~ func(input, options) |
 | filter      | Set/Delete custom Filter (Model) 					| (name (String/HashTable), [func]) ~ func(scenario) |
 |             | -           ||			
-| model    	  | -								   					| (name, [schema (String/HashTable)]) 		|
+| model    	  | -								   					| (name, [schema]) 		|
 
-#### Model
+#### Instance of model
 
 | Name        | Desc        | Args			|
 |-------------|-------------|-------------|

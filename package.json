@@ -1,6 +1,6 @@
 {
     "name": "0model",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Lightweight and Powerful model for data",
 
     "homepage": "http://666.io",
@@ -41,6 +41,6 @@
         "url": "https://github.com/Daeren/0model/issues"
     },
 
-    "_id": "0model@0.0.1",
+    "_id": "0model@0.0.2",
     "_from": "0model@"
 }
