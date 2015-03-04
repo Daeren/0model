@@ -302,10 +302,6 @@ var $model = (function createInstance() {
 
                 //-------]>
 
-                "existMethod": function(name) {
-                    return schMethods && schMethods.hasOwnProperty(name);
-                },
-
                 "toJSON": function(replacer, space) {
                     return JSON.stringify(this.data(), replacer, space);
                 },
@@ -345,15 +341,22 @@ var $model = (function createInstance() {
                 return new resModel(data, scenario);
             };
 
+            result.static = {};
+            result.existMethod = function(name) {
+                return schMethods && schMethods.hasOwnProperty(name);
+            };
+
+            //-------]>
+
             if(schStatic) {
                 for(var field in schStatic) {
                     if(!Object.prototype.hasOwnProperty.call(schStatic, field)) continue;
 
-                    result[field] = schStatic[field];
+                    result.static[field] = schStatic[field];
                 }
             }
 
-            Object.freeze(result);
+            Object.freeze(result.static);
 
             return gModelStore[name] = result;
         }

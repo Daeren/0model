@@ -26,13 +26,23 @@
 | Name          | Desc          | Val		  |
 | ------------- |:-------------:|-------------|
 |               |         EVENTS                ||
-| onCreate      | -  | func() |
-| onChangeData  | -  | func(name, current, original) |
+| onCreate      | -  							| func() |
+| onChangeData  | -  							| func(name, current, original) |
 |               |         OTHER                 ||
-| static      	| -								| String/HashTable |
-| attributes    | -								| String/HashTable |
-| methods       | -								| String/HashTable |
-| filters    	| -								| String/HashTable |
+| static      	| -								| HashTable |
+| attributes    | -								| HashTable |
+| methods       | -								| HashTable |
+| filters    	| -								| HashTable |
+
+
+#### Model
+
+| Name        | Desc        | ~			  |
+|-------------|-------------|-------------|
+|             | -           ||
+| static      | -										| HashTable |
+|             | -           ||			
+| existMethod | Check existence of the method   		| (name) |
 
 
 #### Instance of model
@@ -43,7 +53,6 @@
 | data        | Always returns only the data  			| (hashTable) or (field, [value/func]) ~ function([model]) |
 | validate    | - 										| (errors [default: false]) |
 |             | -           ||			
-| existMethod | Check existence of the method   		| (name) |
 | toJSON      | -  										| ([replacer], [space]) |
 | fromJSON    | -  										| (data) |
 							
@@ -93,7 +102,7 @@ var SUser = {
 
     "attributes": {
         "name":     {"use": "string", "max": 17, "trim": true},
-        "status":   {"use": "string", "min": 1, "max": 60, "on": "update"},
+        "status":   {"use": "string", "min": 50, "max": 60, "on": "update"},
         "pts":      {"use": "integer", "max": 50},
 
         "pswdSalt": {"use": "string", "unsafe": true}
@@ -134,7 +143,7 @@ var objUser = MUser({"name": "DT", "pts": "32", "pswdSalt": "+++"});
 
 console.log("+----------------------+\n");
 
-console.log("saltSeed:", MUser.saltSeed);
+console.log("saltSeed:", MUser.static.saltSeed);
 console.log("+----------------------+\n");
 
 console.log("name:", objUser.data("name"));
@@ -143,7 +152,7 @@ console.log("data:", objUser.data());
 console.log("+----------------------+\n");
 
 console.log("pswdSalt:", objUser.data("pswdSalt"));
-objUser.data("pswdSalt", MUser.genSalt());
+objUser.data("pswdSalt", MUser.static.genSalt());
 console.log("pswdSalt:", objUser.data("pswdSalt"));
 console.log("+----------------------+\n");
 
@@ -179,8 +188,8 @@ data: { name: 'DT [myTest|Filter', pts: 50 }
 pswdSalt: undefined
 model: onChangeData
 pswdSalt was undefined
-pswdSalt is now 157efe#19ffgk9di
-pswdSalt: 157efe#19ffgk9di
+pswdSalt is now 157efe#19fh9co3s
+pswdSalt: 157efe#19fh9co3s
 +----------------------+
 
 validate: true
@@ -189,7 +198,7 @@ model: onChangeData
 status was undefined
 status is now HP: 13
 status: HP: 13
-validate: true
+validate: false
 +----------------------+
 
 getName: User name: DT [myTest|Filter

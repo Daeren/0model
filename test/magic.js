@@ -43,7 +43,7 @@ var SUser = {
 
     "attributes": {
         "name":     {"use": "string", "max": 17, "trim": true},
-        "status":   {"use": "string", "min": 1, "max": 60, "on": "update"},
+        "status":   {"use": "string", "min": 50, "max": 60, "on": "update"},
         "pts":      {"use": "integer", "max": 50},
 
         "pswdSalt": {"use": "string", "unsafe": true}
@@ -84,7 +84,7 @@ var objUser = MUser({"name": "DT", "pts": "32", "pswdSalt": "+++"});
 
 console.log("+----------------------+\n");
 
-console.log("saltSeed:", MUser.saltSeed);
+console.log("saltSeed:", MUser.static.saltSeed);
 console.log("+----------------------+\n");
 
 console.log("name:", objUser.data("name"));
@@ -93,7 +93,7 @@ console.log("data:", objUser.data());
 console.log("+----------------------+\n");
 
 console.log("pswdSalt:", objUser.data("pswdSalt"));
-objUser.data("pswdSalt", MUser.genSalt());
+objUser.data("pswdSalt", MUser.static.genSalt());
 console.log("pswdSalt:", objUser.data("pswdSalt"));
 console.log("+----------------------+\n");
 
