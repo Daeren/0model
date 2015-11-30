@@ -23,3 +23,10 @@ console.log(
     zm("{}").json().string().get,
     zm("[1,2]").to.json().get
 );
+
+console.log(
+    "%s | %s",
+
+    zm("9.9").to.int().is.required(),
+    zm().to.int().is.required()
+);

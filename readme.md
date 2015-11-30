@@ -9,8 +9,11 @@
 |-------------------|-------------------------------|---------------------------------------------------------------------------|
 |                   | -                             |                                                                           |
 | to                | object                        | this                                                                      |
-| get               | -                             | current value                                                             |
+| then              | object                        | this                                                                      |
+| is                | object                        | this                                                                      |
 |                   | -                             |                                                                           |
+| get               | -                             | current value                                                             |
+|                   | [T]                           |                                                                           |
 | bool              | function                      | (true, on, yes, 1) = true                                                 |
 | boolean           | function                      |                                                                           |
 |                   | -                             |                                                                           |
@@ -27,6 +30,10 @@
 |                   | -                             |                                                                           |
 | hashTable         | function                      |                                                                           |
 | array             | function                      |                                                                           |
+| json              | function                      |                                                                           |
+|                   | [V]                           |                                                                           |
+| required          | function                      | not: NaN, [], null, undefined, "", Invalid Date                           |
+| empty             | function                      | If string not empty                                                       |
 | json              | function                      |                                                                           |
 
 
@@ -45,6 +52,7 @@ Global var: `zm`
 var zm = require("0model");
 
 zm(data).string().get.trim();
+zm(data).to.int().is.required();
 
 zm("[1,2]").to.json().get;
 zm("[1,").to.json().to.string().get;

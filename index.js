@@ -10,8 +10,15 @@ var zm = (function createInstance() {
 
     //-----------------------------------------------]>
 
+    var gReStrIsEmpty = /^[\s\t\r\n]*$/;
+
+    //------------------------]>
+
     function CType(v) {
         this.to = this;
+        this.then = this;
+        this.is = this;
+
         this.get = v;
     }
 
@@ -34,6 +41,11 @@ var zm = (function createInstance() {
     CType.prototype.hashTable = toHashTable;
     CType.prototype.array = toArray;
     CType.prototype.json = toJson;
+
+
+    CType.prototype.required = isRequired;
+    CType.prototype.empty = isEmpty;
+
 
     CType.prototype.valueOf     =
     CType.prototype.toString    = function() { return this.get; };
@@ -241,6 +253,36 @@ var zm = (function createInstance() {
         this.get = r;
 
         return this;
+    }
+
+    //----------------]>
+
+    function isRequired() {
+        var input = this.get;
+
+        switch(typeof(input)) {
+            case "number":
+                return !isNaN(input);
+
+            case "string":
+                return input.length > 0;
+
+            default:
+                if(input) {
+                    if(Array.isArray(input)) {
+                        return input.length > 0;
+                    }
+                    else if(input instanceof(Date)) {
+                        return !!input.getTime();
+                    }
+                }
+        }
+
+        return false;
+    }
+
+    function isEmpty() {
+        return !!this.get.match(gReStrIsEmpty);
     }
 })();
 
