@@ -44,6 +44,8 @@ Global var: `zm`
 ```js
 var zm = require("0model");
 
+zm(data).string().get.trim();
+
 zm("[1,2]").to.json().get;
 zm("[1,").to.json().to.string().get;
 zm("[1,").json().string().get;
