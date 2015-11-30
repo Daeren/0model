@@ -34,6 +34,9 @@ var zm = (function createInstance() {
     CType.prototype.array = toArray;
     CType.prototype.json = toJson;
 
+    CType.prototype.valueOf     =
+    CType.prototype.toString    = function() { return this.get; };
+
     //-----------------------------------------------]>
 
     return function createCType(v) {

@@ -43,11 +43,12 @@ Global var: `zm`
 ```js
 var zm = require("0model");
 
-zm("[1,2]").to.json().get
-zm("[1,").to.json().to.string().get,
+zm("[1,2]").to.json().get;
+zm("[1,").to.json().to.string().get;
+zm("[1,").json().string().get;
 
-zm("[1,").json().string().get,
-zm(5.9).to.integer().string().get,
+zm(5.9).to.integer().string() + 10;
+zm(5.9).to.integer() + " num";
 ```
 
 
