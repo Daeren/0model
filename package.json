@@ -1,15 +1,11 @@
 {
     "name": "0model",
-    "version": "0.0.2",
-    "description": "Lightweight and Powerful model for data",
+    "version": "0.0.3",
+    "description": "Lightweight module for data control",
 
     "homepage": "http://666.io",
     "keywords": [
         "strong typing",
-        "model",
-        "data-model",
-        "validate",
-        "validation",
         "data",
         "justdoit"
     ],
@@ -29,18 +25,11 @@
     "engines": {
         "node": ">= 0.8.0"
     },
-  
-	"dependencies": {
-		"aigis": "*"
-	},
 	
     "readme": "",
     "readmeFilename": "readme.md",
 
     "bugs": {
         "url": "https://github.com/Daeren/0model/issues"
-    },
-
-    "_id": "0model@0.0.2",
-    "_from": "0model@"
+    }
 }
