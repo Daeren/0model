@@ -14,7 +14,8 @@
 | bool              | function                      | (true, on, yes, 1) = true                                                 |
 | boolean           | function                      |                                                                           |
 |                   | -                             |                                                                           |
-| string            | function                      | (NaN, null, undefined, []) = ""                                           |
+| str               | function                      | (NaN, null, undefined, []) = ""                                           |
+| string            | function                      |                                                                           |
 |                   | -                             |                                                                           |
 | int               | function(radix)               |                                                                           |
 | integer           | function(radix)               |                                                                           |
@@ -47,7 +48,7 @@ zm("[1,2]").to.json().get;
 zm("[1,").to.json().to.string().get;
 zm("[1,").json().string().get;
 
-zm(5.9).to.integer().string() + 10;
+zm(5.9).int().str() + 10;
 zm(5.9).to.integer() + " num";
 ```
 

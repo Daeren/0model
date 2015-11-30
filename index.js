@@ -17,16 +17,17 @@ var zm = (function createInstance() {
 
     CType.prototype = {};
 
-    CType.prototype.bool = toBoolean;
+    CType.prototype.bool    =
     CType.prototype.boolean = toBoolean;
 
-    CType.prototype.string = toString;
+    CType.prototype.str     =
+    CType.prototype.string  = toString;
 
-    CType.prototype.int = toInteger;
+    CType.prototype.int     =
     CType.prototype.integer = toInteger;
 
-    CType.prototype.float = toFloat;
-    CType.prototype.number = toFloat;
+    CType.prototype.float   =
+    CType.prototype.number  = toFloat;
 
     CType.prototype.date = toDate;
 
