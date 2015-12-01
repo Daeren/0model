@@ -43,6 +43,9 @@ var zm = (function createInstance() {
     CType.prototype.json = toJson;
 
 
+    CType.prototype.remove = modRemove;
+
+
     CType.prototype.required = isRequired;
     CType.prototype.empty = isEmpty;
 
@@ -248,6 +251,30 @@ var zm = (function createInstance() {
             default:
                 r = null;
                 break;
+        }
+
+        this.get = r;
+
+        return this;
+    }
+
+    //----------------]>
+
+    function modRemove(t) {
+        var r, input = this.get;
+
+        if(t instanceof RegExp) {
+            r = input.replace(t, "");
+        }
+        else {
+            switch(typeof(t)) {
+                case "function":
+                    r = t(input);
+                    break;
+
+                default:
+                    r = input;
+            }
         }
 
         this.get = r;

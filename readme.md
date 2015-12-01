@@ -31,10 +31,11 @@
 | hashTable         | function                      |                                                                           |
 | array             | function                      |                                                                           |
 | json              | function                      |                                                                           |
+|                   | [M]                           |                                                                           |
+| remove            | function(t)                   | t: regEx (string), function (custom)                                      |
 |                   | [V]                           |                                                                           |
 | required          | function                      | not: NaN, [], null, undefined, "", Invalid Date                           |
 | empty             | function                      | If string not empty                                                       |
-| json              | function                      |                                                                           |
 
 
 
@@ -51,8 +52,10 @@ Global var: `zm`
 ```js
 var zm = require("0model");
 
+
 zm(data).string().get.trim();
 zm(data).to.int().is.required();
+
 
 zm("[1,2]").to.json().get;
 zm("[1,").to.json().to.string().get;
@@ -60,6 +63,11 @@ zm("[1,").json().string().get;
 
 zm(5.9).int().str() + 10;
 zm(5.9).to.integer() + " num";
+
+
+zm("hello 2 world").to.string().then.remove(/\d+/).is.required();
+zm("hello 2 world").to.string().then.remove(/\d+/).get;
+zm("hello 2 world").to.string().then.remove(d => d + d).get;
 ```
 
 

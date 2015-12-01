@@ -30,3 +30,12 @@ console.log(
     zm("9.9").to.int().is.required(),
     zm().to.int().is.required()
 );
+
+
+console.log(
+    "%s | %s | %s",
+
+    zm("hello 2 world").to.string().then.remove(/\d+/).is.required(),
+    zm("hello 2 world").to.string().then.remove(/\d+/).get,
+    zm("hello 2 world").to.string().then.remove(d => d + d).get
+);
