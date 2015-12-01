@@ -122,23 +122,17 @@ var zm = (function createInstance() {
     }
 
     function toInt(radix) {
-        var r, input = this.value;
+        var r       = NaN,
+            input   = this.value;
 
-        if(input === null) {
-            r = NaN
-        }
-        else {
+        if(input !== null) {
             switch(typeof(input)) {
                 case "undefined":
-                    r = NaN;
                     break;
 
                 case "object":
                     if(input instanceof(Date)) {
                         r = typeof(input.valueOf) === "function" ? input.valueOf() : NaN;
-                    }
-                    else {
-                        r = NaN;
                     }
 
                     break;
