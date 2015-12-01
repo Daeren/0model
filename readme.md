@@ -13,6 +13,7 @@
 | to                | object                        | this                                                                      |
 | then              | object                        | this                                                                      |
 | is                | object                        | this                                                                      |
+| it                | object                        | this                                                                      |
 |                   | -                             |                                                                           |
 | get               | -                             | current value                                                             |
 |                   | [T]                           |                                                                           |
@@ -67,9 +68,9 @@ zm(5.9).int().str() + 10;
 zm(5.9).to.integer() + " num";
 
 
-zm("hello 2 world").to.string().then.remove(/\d+/).is.required();
+zm("hello 2 world").to.string().then.remove(/\d+/).it.required();
 zm("hello 2 world").to.string().then.remove(/\d+/).get;
-zm("hello 2 world").to.string().then.remove(d => d + d).get;
+zm("hello 2 world").to.string().then.remove(d => d.substr(2)) + "!";
 ```
 
 

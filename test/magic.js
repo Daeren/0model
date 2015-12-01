@@ -35,7 +35,7 @@ console.log(
 console.log(
     "%s | %s | %s",
 
-    zm("hello 2 world").to.string().then.remove(/\d+/).is.required(),
+    zm("hello 2 world").to.string().then.remove(/\d+/).it.required(),
     zm("hello 2 world").to.string().then.remove(/\d+/).get,
     zm("hello 2 world").to.string().then.remove(d => d + d).get
 );

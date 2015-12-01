@@ -15,11 +15,12 @@ var zm = (function createInstance() {
     //------------------------]>
 
     function CType(v) {
-        this.to = this;
-        this.then = this;
-        this.is = this;
+        this.to     = this;
+        this.then   = this;
+        this.is     = this;
+        this.it     = this;
 
-        this.get = v;
+        this.get    = v;
     }
 
     CType.prototype = {};
