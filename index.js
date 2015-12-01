@@ -240,24 +240,29 @@ var zm = (function createInstance() {
         return this;
     }
 
-    function toJson() {
-        var r, input = this.value;
+    function toJson(reviver) {
+        var r       = null,
+            input   = this.value,
+            inType  = typeof(input);
 
-        switch(typeof(input)) {
-            case "object":
-                r = input;
-                break;
+        if(inType === "undefined" || inType === "number" && isNaN(input)) {
+            r = null;
+        }
+        else if(
+            !Array.isArray(input) &&
+            input && inType !== "object" &&
+            inType !== "number" &&
+            inType !== "boolean"
+        ) {
+            try {
+                r = JSON.parse(input, reviver); // <-- RFC 4627
+            } catch(e) {
+                r = null;
 
-            default:
-                try {
-                    r = JSON.parse(input); // <-- RFC 4627
-                } catch(e) {
-                    r = null;
-
-                    this.lastError = e;
-                }
-
-                break;
+                this.lastError = e;
+            }
+        } else {
+            r = input;
         }
 
         this.value = r;

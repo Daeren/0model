@@ -210,7 +210,9 @@ describe("~", function() {
         test({}, {});
         test([1,2], [1,2]);
         test({x:1, z:2}, {x:1, z:2});
+
         test("[1,2]", [1,2]);
+        test(JSON.stringify({x:1, z:2}), {x:1, z:2});
 
         test(NaN, null);
         test(null, null);
