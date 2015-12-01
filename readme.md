@@ -17,17 +17,10 @@
 |                   | -                             |                                                                           |
 | get               | -                             | current value                                                             |
 |                   | [T]                           |                                                                           |
-| bool              | function                      | (true, on, yes, 1) = true                                                 |
-| boolean           | function                      |                                                                           |
-|                   | -                             |                                                                           |
-| str               | function                      | (NaN, null, undefined, []) = ""                                           |
-| string            | function                      |                                                                           |
-|                   | -                             |                                                                           |
-| int               | function(radix)               |                                                                           |
-| integer           | function(radix)               |                                                                           |
-|                   | -                             |                                                                           |
-| float             | function                      |                                                                           |
-| number            | function                      |                                                                           |
+| bool, boolean     | function                      | (true, on, yes, 1) = true                                                 |
+| str, string       | function                      | (NaN, null, undefined, []) = ""                                           |
+| int, integer      | function(radix)               |                                                                           |
+| float, number     | function                      |                                                                           |
 |                   | -                             |                                                                           |
 | date              | function                      |                                                                           |
 |                   | -                             |                                                                           |
@@ -38,7 +31,8 @@
 | remove            | function(t)                   | t: regEx (string), function (custom)                                      |
 |                   | [V]                           |                                                                           |
 | required          | function                      | not: NaN, [], null, undefined, "", Invalid Date                           |
-| empty             | function                      | If string not empty                                                       |
+| empty             | function                      | if string not empty                                                       |
+| has, have         | function(...)                 | for: string, array, hashTable                                             |
 
 
 
