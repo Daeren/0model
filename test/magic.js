@@ -34,7 +34,11 @@ console.log(
 
 
 console.log(
-    "%s | %s | %s",
+    "%s | %s %s | %s | %s | %s | %s",
+
+    zm(-3.5).int().abs().get,
+    zm(3.5).float().abs().get,
+    zm(3.5).float().clamp(10, 20).get,
 
     zm("hello 2 world").to.string().then.remove(/\d+/).it.required(),
     zm("hello 2 world").to.string().then.remove(/\d+/).get,

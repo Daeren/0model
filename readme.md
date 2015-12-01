@@ -29,6 +29,8 @@
 | json              | function                      |                                                                           |
 |                   | [M]                           |                                                                           |
 | remove            | function(t)                   | t: string, regEx (string), function (custom)                              |
+| abs               | function                      |                                                                           |
+| clamp             | function(min, max)            |                                                                           |
 |                   | [V]                           |                                                                           |
 | required          | function                      | not: NaN, [], null, undefined, "", Invalid Date                           |
 | empty             | function                      | if string not empty                                                       |

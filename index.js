@@ -45,6 +45,8 @@ var zm = (function createInstance() {
 
 
     CType.prototype.remove = modRemove;
+    CType.prototype.abs = modAbs;
+    CType.prototype.clamp = modClamp;
 
 
     CType.prototype.required = isRequired;
@@ -287,6 +289,21 @@ var zm = (function createInstance() {
 
         this.get = r;
 
+        return this;
+    }
+
+    function modAbs() {
+        var input = this.get;
+
+        if(input < 0) {
+            this.get = Math.abs(input);
+        }
+
+        return this;
+    }
+
+    function modClamp(min, max) {
+        this.get = Math.max(min, Math.min(max, this.get));
         return this;
     }
 
