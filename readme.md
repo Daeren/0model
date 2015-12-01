@@ -57,7 +57,7 @@ var zm = require("0model");
 
 
 zm(data).string().get.trim();
-zm(data).to.int().is.required();
+zm(data).to.int().it.is.required();
 
 
 zm("[1,2]").to.json().get;
@@ -68,7 +68,7 @@ zm(5.9).int().str() + 10;
 zm(5.9).to.integer() + " num";
 
 
-zm("hello 2 world").to.string().then.remove(/\d+/).it.required();
+zm("hello 2 world").to.string().then.remove(/\d+/).it.is.required();
 zm("hello 2 world").to.string().then.remove(/\d+/).get;
 zm("hello 2 world").to.string().then.remove(d => d.substr(2)) + "!";
 ```
