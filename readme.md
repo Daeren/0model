@@ -59,6 +59,8 @@ var zm = require("0model");
 zm(data).string().get.trim();
 zm(data).to.int().it.is.required();
 
+zm({x: 1, y: 2}).to.have("x", "z");
+
 
 zm("[1,2]").to.json().get;
 zm("[1,").to.json().to.string().get;

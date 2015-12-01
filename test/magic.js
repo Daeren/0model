@@ -24,6 +24,7 @@ console.log(
     zm("[1,2]").to.json().get
 );
 
+
 console.log(
     "%s | %s",
 
@@ -38,4 +39,17 @@ console.log(
     zm("hello 2 world").to.string().then.remove(/\d+/).it.required(),
     zm("hello 2 world").to.string().then.remove(/\d+/).get,
     zm("hello 2 world").to.string().then.remove(d => d + d).get
+);
+
+
+console.log(
+    "%s | %s | %s | %s | %s",
+
+    zm({x: 1, y: 2}).to.have("x"),
+
+    zm({x: 1, y: 2}).to.json().it.has("x"),
+    zm({x: 1, y: 2}).to.json().it.has("x", "y"),
+    zm({x: 1, y: 2}).to.json().it.has("x", "y", "z"),
+
+    zm("hello world").to.string().it.has("hello", "world")
 );

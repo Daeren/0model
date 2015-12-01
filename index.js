@@ -50,6 +50,9 @@ var zm = (function createInstance() {
     CType.prototype.required = isRequired;
     CType.prototype.empty = isEmpty;
 
+    CType.prototype.has     =
+    CType.prototype.have    = isHave;
+
 
     CType.prototype.valueOf     =
     CType.prototype.toString    = function() { return this.get; };
@@ -306,6 +309,42 @@ var zm = (function createInstance() {
 
     function isEmpty() {
         return !!this.get.match(gReStrIsEmpty);
+    }
+
+    function isHave() {
+        var input = this.get;
+
+        if(!input) {
+            return false;
+        }
+
+        //---------]>
+
+        var argLen = arguments.length;
+
+        if(typeof(input) === "string" || Array.isArray(input)) {
+            while(argLen--) {
+                if(input.indexOf(arguments[argLen]) === -1) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        //---------]>
+
+        var has = Object.prototype.hasOwnProperty;
+
+        while(argLen--) {
+            if(!has.call(input, arguments[argLen])) {
+                return false;
+            }
+        }
+
+        //---------]>
+
+        return true;
     }
 })();
 
