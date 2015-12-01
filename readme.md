@@ -1,3 +1,5 @@
+[![Codacy][cod_b]][cod_l]
+
 `npm -g install 0model`
 
 * Browser: +
@@ -80,3 +82,6 @@ MIT
 
 
 [1]: http://666.io
+
+[cod_b]: https://img.shields.io/codacy/88b55f71c45a47838d24ed1e5fd2476c.svg
+[cod_l]: https://www.codacy.com/app/daeren/0model/dashboard

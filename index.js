@@ -25,13 +25,13 @@ var zm = (function createInstance() {
     CType.prototype = {};
 
     CType.prototype.bool    =
-    CType.prototype.boolean = toBoolean;
+    CType.prototype.boolean = toBool;
 
     CType.prototype.str     =
-    CType.prototype.string  = toString;
+    CType.prototype.string  = toStr;
 
     CType.prototype.int     =
-    CType.prototype.integer = toInteger;
+    CType.prototype.integer = toInt;
 
     CType.prototype.float   =
     CType.prototype.number  = toFloat;
@@ -61,7 +61,7 @@ var zm = (function createInstance() {
 
     //-----------------------------------------------]>
 
-    function toBoolean() {
+    function toBool() {
         var r, input = this.get;
 
         switch(typeof(input)) {
@@ -82,7 +82,7 @@ var zm = (function createInstance() {
         return this;
     }
 
-    function toString() {
+    function toStr() {
         var r, input = this.get;
 
         if(input === null) {
@@ -98,17 +98,12 @@ var zm = (function createInstance() {
                     r = input;
                     break;
 
-                case "object":
-                    r = typeof(input.toString) === "function" ? input.toString() : Object.prototype.toString.call(input);
+                case "number":
+                    r = isNaN(input) ? "" : (input + "");
                     break;
 
                 default:
-                    if(isNaN(input)) {
-                        r = "";
-                    }
-                    else {
-                        r = typeof(input.toString) === "function" ? input.toString() : (input + "");
-                    }
+                    r = typeof(input.toString) === "function" ? input.toString() : Object.prototype.toString.call(input);
             }
         }
 
@@ -117,7 +112,7 @@ var zm = (function createInstance() {
         return this;
     }
 
-    function toInteger(radix) {
+    function toInt(radix) {
         var r, input = this.get;
 
         if(input === null) {
