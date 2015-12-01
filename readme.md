@@ -2,6 +2,7 @@
 
 `npm -g install 0model`
 
+* Coverage: +
 * Browser: +
 
 
@@ -10,12 +11,13 @@
 | Attribute         | Type                          | Note                                                                      |
 |-------------------|-------------------------------|---------------------------------------------------------------------------|
 |                   | -                             |                                                                           |
-| to                | object                        | this                                                                      |
-| then              | object                        | this                                                                      |
-| is                | object                        | this                                                                      |
-| it                | object                        | this                                                                      |
+| to, then, is, it  | object                        | this                                                                      |
 |                   | -                             |                                                                           |
-| get               | -                             | current value                                                             |
+| set               | function(v)                   | return this;                                                              |
+| get               | function()                    | current value                                                             |
+|                   | -                             |                                                                           |
+| lastError         | -                             |                                                                           |
+| value             | -                             | current value                                                             |
 |                   | [T]                           |                                                                           |
 | bool, boolean     | function                      | (true, on, yes, 1) = true                                                 |
 | str, string       | function                      | (NaN, null, undefined, []) = ""                                           |
@@ -52,22 +54,22 @@ Global var: `zm`
 var zm = require("0model");
 
 
-zm(data).string().get.trim();
+zm(data).string().get().trim();
 zm(data).to.int().it.is.required();
 
 zm({x: 1, y: 2}).to.have("x", "z");
 
 
-zm("[1,2]").to.json().get;
-zm("[1,").to.json().to.string().get;
-zm("[1,").json().string().get;
+zm("[1,2]").to.json().get();
+zm("[1,").to.json().to.string().get();
+zm("[1,").json().string().get();
 
 zm(5.9).int().str() + 10;
 zm(5.9).to.integer() + " num";
 
 
 zm("hello 2 world").to.string().then.remove(/\d+/).it.is.required();
-zm("hello 2 world").to.string().then.remove(/\d+/).get;
+zm("hello 2 world").to.string().then.remove(/\d+/).get();
 zm("hello 2 world").to.string().then.remove(d => d.substr(2)) + "!";
 ```
 

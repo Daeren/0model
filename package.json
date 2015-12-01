@@ -1,9 +1,9 @@
 {
     "name": "0model",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "Lightweight module for data control",
 
-    "homepage": "http://666.io",
+    "homepage": "https://666.io",
     "keywords": [
         "strong typing",
         "data",
@@ -15,7 +15,13 @@
         "email": "x@db.gg"
     },
 
+	"preferGlobal": "true",
+	
     "main": "./index",
+	"scripts": {
+		"test": "mocha --reporter spec"
+	},
+	
     "repository": {
         "type": "git",
         "url": "git://github.com/Daeren/0model.git"

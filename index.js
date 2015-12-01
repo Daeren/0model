@@ -20,7 +20,7 @@ var zm = (function createInstance() {
         this.is     = this;
         this.it     = this;
 
-        this.get    = v;
+        this.value  = v;
     }
 
     CType.prototype = {};
@@ -56,8 +56,11 @@ var zm = (function createInstance() {
     CType.prototype.have    = isHave;
 
 
+    CType.prototype.set = function(v) { this.value = v; return this; };
+    CType.prototype.get = function() { return this.value; };
+
     CType.prototype.valueOf     =
-    CType.prototype.toString    = function() { return this.get; };
+    CType.prototype.toString    = function() { return this.value; };
 
     //-----------------------------------------------]>
 
@@ -68,7 +71,7 @@ var zm = (function createInstance() {
     //-----------------------------------------------]>
 
     function toBool() {
-        var r, input = this.get;
+        var r, input = this.value;
 
         switch(typeof(input)) {
             case "boolean":
@@ -83,13 +86,13 @@ var zm = (function createInstance() {
                 r = input === 1;
         }
 
-        this.get = r;
+        this.value = r;
 
         return this;
     }
 
     function toStr() {
-        var r, input = this.get;
+        var r, input = this.value;
 
         if(input === null) {
             r = "";
@@ -113,13 +116,13 @@ var zm = (function createInstance() {
             }
         }
 
-        this.get = r;
+        this.value = r;
 
         return this;
     }
 
     function toInt(radix) {
-        var r, input = this.get;
+        var r, input = this.value;
 
         if(input === null) {
             r = NaN
@@ -141,17 +144,17 @@ var zm = (function createInstance() {
                     break;
 
                 default:
-                    r = parseInt(input, radix || 10);
+                    r = isNaN(input) ? input : parseInt(input, radix || 10);
             }
         }
 
-        this.get = r;
+        this.value = r;
 
         return this;
     }
 
     function toFloat() {
-        var r, input = this.get;
+        var r, input = this.value;
 
         if(input === null) {
             r = NaN;
@@ -181,13 +184,13 @@ var zm = (function createInstance() {
             }
         }
 
-        this.get = r;
+        this.value = r;
 
         return this;
     }
 
     function toDate() {
-        var r, input = this.get;
+        var r, input = this.value;
 
         if(input && input instanceof(Date)) {
             r = input;
@@ -196,65 +199,68 @@ var zm = (function createInstance() {
             r = new Date(input);
         }
 
-        this.get = r;
+        this.value = r;
 
         return this;
     }
 
     function toHashTable() {
-        var input = this.get;
+        var input = this.value;
 
         if(input && typeof(input) === "string") {
             try {
                 input = JSON.parse(input);
-            } catch(e) { }
+            } catch(e) {
+                input = null;
+
+                this.lastError = e;
+            }
         }
 
-        this.get = input && typeof(input) === "object" && !Array.isArray(input) ? input : {};
+        this.value = input && typeof(input) === "object" && !Array.isArray(input) ? input : {};
 
         return this;
     }
 
     function toArray() {
-        var input = this.get;
+        var input = this.value;
 
         if(input && typeof(input) === "string") {
             try {
                 input = JSON.parse(input);
-            } catch(e) { }
+            } catch(e) {
+                input = null;
+
+                this.lastError = e;
+            }
         }
 
-        this.get = Array.isArray(input) ? input : [];
+        this.value = input && Array.isArray(input) ? input : [];
 
         return this;
     }
 
     function toJson() {
-        var r, input = this.get;
+        var r, input = this.value;
 
         switch(typeof(input)) {
             case "object":
                 r = input;
                 break;
 
-            case "string":
-                if(!input) {
-                    r = null;
-                }
-                else {
-                    try {
-                        r = JSON.parse(input);
-                    } catch(e) { }
-                }
-
-                break;
-
             default:
-                r = null;
+                try {
+                    r = JSON.parse(input); // <-- RFC 4627
+                } catch(e) {
+                    r = null;
+
+                    this.lastError = e;
+                }
+
                 break;
         }
 
-        this.get = r;
+        this.value = r;
 
         return this;
     }
@@ -262,7 +268,7 @@ var zm = (function createInstance() {
     //----------------]>
 
     function modRemove(t) {
-        var r, input = this.get;
+        var r, input = this.value;
 
         switch(typeof(t)) {
             case "string":
@@ -287,30 +293,30 @@ var zm = (function createInstance() {
                 r = input;
         }
 
-        this.get = r;
+        this.value = r;
 
         return this;
     }
 
     function modAbs() {
-        var input = this.get;
+        var input = this.value;
 
         if(input < 0) {
-            this.get = Math.abs(input);
+            this.value = Math.abs(input);
         }
 
         return this;
     }
 
     function modClamp(min, max) {
-        this.get = Math.max(min, Math.min(max, this.get));
+        this.value = Math.max(min, Math.min(max, this.value));
         return this;
     }
 
     //----------------]>
 
     function isRequired() {
-        var input = this.get;
+        var input = this.value;
 
         switch(typeof(input)) {
             case "number":
@@ -334,11 +340,11 @@ var zm = (function createInstance() {
     }
 
     function isEmpty() {
-        return !!this.get.match(gReStrIsEmpty);
+        return !!this.value.match(gReStrIsEmpty);
     }
 
     function isHave() {
-        var input = this.get;
+        var input = this.value;
 
         if(!input) {
             return false;

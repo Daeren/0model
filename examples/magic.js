@@ -16,12 +16,12 @@ var zm = require("../index");
 console.log(
     "%s | %s | %s | %s | %s",
 
-    zm("gg").to.integer().string().get,
+    zm("gg").to.integer().string().get(),
     zm(5.9).int().str() + 10,
 
-    zm("[1,").to.json().to.string().get,
-    zm("{}").json().string().get,
-    zm("[1,2]").to.json().get
+    zm("[1,").to.json().to.string().get(),
+    zm("{}").json().string().get(),
+    zm("[1,2]").to.json().get()
 );
 
 
@@ -36,13 +36,13 @@ console.log(
 console.log(
     "%s | %s %s | %s | %s | %s | %s",
 
-    zm(-3.5).int().abs().get,
-    zm(3.5).float().abs().get,
-    zm(3.5).float().clamp(10, 20).get,
+    zm(-3.5).int().abs().get(),
+    zm(3.5).float().abs().get(),
+    zm(3.5).float().clamp(10, 20).get(),
 
     zm("hello 2 world").to.string().then.remove(/\d+/).it.required(),
-    zm("hello 2 world").to.string().then.remove(/\d+/).get,
-    zm("hello 2 world").to.string().then.remove(d => d + d).get
+    zm("hello 2 world").to.string().then.remove(/\d+/).get(),
+    zm("hello 2 world").to.string().then.remove(d => d + d).get()
 );
 
 
