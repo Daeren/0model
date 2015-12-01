@@ -6,39 +6,6 @@
 * Browser: +
 
 
-#### Instance 
-
-| Attribute         | Type                          | Note                                                                      |
-|-------------------|-------------------------------|---------------------------------------------------------------------------|
-|                   | -                             |                                                                           |
-| to, then, is, it  | object                        | this                                                                      |
-|                   | -                             |                                                                           |
-| set               | function(v)                   | return this;                                                              |
-| get               | function()                    | current value                                                             |
-|                   | -                             |                                                                           |
-| lastError         | -                             |                                                                           |
-| value             | -                             | current value                                                             |
-|                   | [T]                           |                                                                           |
-| bool, boolean     | function                      | (true, on, yes, 1) = true                                                 |
-| str, string       | function                      | (NaN, null, undefined, []) = ""                                           |
-| int, integer      | function(radix)               |                                                                           |
-| float, number     | function                      |                                                                           |
-|                   | -                             |                                                                           |
-| date              | function                      |                                                                           |
-|                   | -                             |                                                                           |
-| hashTable         | function                      |                                                                           |
-| array             | function                      |                                                                           |
-| json              | function                      |                                                                           |
-|                   | [M]                           |                                                                           |
-| remove            | function(t)                   | t: string, regEx (string), function (custom)                              |
-| abs               | function                      |                                                                           |
-| clamp             | function(min, max)            |                                                                           |
-|                   | [V]                           |                                                                           |
-| required          | function                      | not: NaN, [], null, undefined, "", Invalid Date                           |
-| empty             | function                      | if string not empty                                                       |
-| has, have         | function(...)                 | for: string, array, hashTable                                             |
-
-
 
 #### Browser
 
@@ -72,6 +39,41 @@ zm("hello 2 world").to.string().then.remove(/\d+/).it.is.required();
 zm("hello 2 world").to.string().then.remove(/\d+/).get();
 zm("hello 2 world").to.string().then.remove(d => d.substr(2)) + "!";
 ```
+
+
+
+#### Instance 
+
+| Attribute         | Type                          | Note                                                                      |
+|-------------------|-------------------------------|---------------------------------------------------------------------------|
+|                   | -                             |                                                                           |
+| to, then, is, it  | object                        | this                                                                      |
+|                   | -                             |                                                                           |
+| set               | function(v)                   | return this;                                                              |
+| get               | function()                    | current value                                                             |
+|                   | -                             |                                                                           |
+| lastError         | -                             |                                                                           |
+| value             | -                             | current value                                                             |
+|                   | [T]                           |                                                                           |
+| bool, boolean     | function                      | (true, on, yes, 1) = true                                                 |
+| str, string       | function                      | (NaN, null, undefined, []) = ""                                           |
+| int, integer      | function(radix)               |                                                                           |
+| float, number     | function                      |                                                                           |
+|                   | -                             |                                                                           |
+| date              | function                      |                                                                           |
+|                   | -                             |                                                                           |
+| hashTable         | function                      |                                                                           |
+| array             | function                      |                                                                           |
+| json              | function                      |                                                                           |
+|                   | [M]                           |                                                                           |
+| remove            | function(t)                   | t: string, regEx (string), function (custom)                              |
+| abs               | function                      |                                                                           |
+| clamp             | function(min, max)            |                                                                           |
+|                   | [V]                           |                                                                           |
+| required          | function                      | not: NaN, [], null, undefined, "", Invalid Date                           |
+| empty             | function                      | if string not empty                                                       |
+| has, have         | function(...)                 | for: string, array, hashTable                                             |
+
 
 
 ## License
