@@ -28,7 +28,7 @@
 | array             | function                      |                                                                           |
 | json              | function                      |                                                                           |
 |                   | [M]                           |                                                                           |
-| remove            | function(t)                   | t: regEx (string), function (custom)                                      |
+| remove            | function(t)                   | t: string, regEx (string), function (custom)                              |
 |                   | [V]                           |                                                                           |
 | required          | function                      | not: NaN, [], null, undefined, "", Invalid Date                           |
 | empty             | function                      | if string not empty                                                       |

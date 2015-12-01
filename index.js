@@ -262,18 +262,27 @@ var zm = (function createInstance() {
     function modRemove(t) {
         var r, input = this.get;
 
-        if(t instanceof RegExp) {
-            r = input.replace(t, "");
-        }
-        else {
-            switch(typeof(t)) {
-                case "function":
-                    r = t(input);
-                    break;
+        switch(typeof(t)) {
+            case "string":
+                r = input.replace(t, "");
+                break;
 
-                default:
+            case "function":
+                r = t(input);
+                break;
+
+            case "object":
+                if(t instanceof RegExp) {
+                    r = input.replace(t, "");
+                }
+                else {
                     r = input;
-            }
+                }
+
+                break;
+
+            default:
+                r = input;
         }
 
         this.get = r;
