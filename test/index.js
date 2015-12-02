@@ -49,9 +49,7 @@ describe("Methods", function() {
         "int", "integer",
         "float", "number",
 
-        "has", "have",
-
-        "valueOf", "toString"
+        "has", "have"
     ];
 
     [
@@ -68,7 +66,10 @@ describe("Methods", function() {
         "empty",
 
         "set",
-        "get"
+        "get",
+
+        "valueOf",
+        "toString"
     ]
         .concat(methodsEqual)
         .forEach(function(method) {
@@ -98,6 +99,14 @@ describe("~", function() {
 
         expect(zm.value).to.equal(13);
         expect(zm.get()).to.equal(13);
+    });
+
+    it("valueOf", function() {
+        expect(rZm("6").to.int() + 7).to.equal(13);
+    });
+
+    it("toString", function() {
+        expect(rZm("6").to.int() + "7").to.equal("67");
     });
 
     it("boolean", function() {

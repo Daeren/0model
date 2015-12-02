@@ -59,8 +59,8 @@ var zm = (function createInstance() {
     CType.prototype.set = function(v) { this.value = v; return this; };
     CType.prototype.get = function() { return this.value; };
 
-    CType.prototype.valueOf     =
-    CType.prototype.toString    = function() { return this.value; };
+    CType.prototype.valueOf = function() { return this.value; };
+    CType.prototype.toString = function() { return this.string(); };
 
     //-----------------------------------------------]>
 
