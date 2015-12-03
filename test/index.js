@@ -121,9 +121,13 @@ describe("~", function() {
         test("1", true);
 
         test(1, true);
+        test(-1, true);
 
+        test(0, false);
         test(NaN, false);
         test(null, false);
+        test(undefined, false);
+        test("", false);
         test("0xDEADBEEF", false);
 
         function test(a, b) {

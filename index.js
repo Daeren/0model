@@ -83,7 +83,7 @@ var zm = (function createInstance() {
                 break;
 
             default:
-                r = input === 1;
+                r = input ? true : false;
         }
 
         this.value = r;
