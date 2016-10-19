@@ -35,8 +35,8 @@ zm(5.9).to.integer() + " num";              // <-- '5 num'
 zm(zm('d0' / 1)).empty();                   // <-- true
 
 
-zm([1, 2, 3]).set(x => x.reduce((a, b) => a + b)).get();
-zm(3.14159).set(x => x.toFixed(0)).str().get();
+zm([1, 2, 3]).set(x => x.reduce((a, b) => a + b)).get(console.log);
+zm(3.14159).set(x => x.toFixed(0)).str().get(console.log);
 
 
 zm("hello 2 world").to.string().then.remove(/\d+/).it.is.required();
@@ -53,8 +53,8 @@ zm("hello 2 world").to.string().then.remove(d => d.substr(2)) + "!";
 |                   | -                             |                                                                           |
 | to, then, is, it  | object                        | this                                                                      |
 |                   | -                             |                                                                           |
-| set               | function(v)                   | return this;                                                              |
-| get               | function()                    | current value                                                             |
+| set               | function(v)                   | return: this                                                              |
+| get               | function([callback])          | return: current value                                                     |
 |                   | -                             |                                                                           |
 | lastError         | -                             |                                                                           |
 | value             | -                             | current value                                                             |

@@ -72,7 +72,13 @@ var zm = (function createInstance() {
         return this;
     };
 
-    CType.prototype.get = function() { return this.value; };
+    CType.prototype.get = function(v) {
+        if(typeof(v) === "function") {
+            v(this.value);
+        }
+
+        return this.value;
+    };
 
     CType.prototype.valueOf = function() { return this.value; };
     CType.prototype.toString = function() { return this.string(); };
