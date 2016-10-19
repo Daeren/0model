@@ -163,7 +163,7 @@ var zm = (function createInstance() {
                     break;
 
                 default:
-                    r = isNaN(input) ? input : parseInt(input, radix || 10);
+                    r = parseInt(input, radix || 10);
             }
         }
 
