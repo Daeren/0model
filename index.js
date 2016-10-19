@@ -238,15 +238,13 @@ var zm = (function createInstance() {
         return this;
     }
 
-    function toHashTable() {
+    function toHashTable(notParse) {
         var input = this.value;
 
-        if(input && typeof(input) === "string") {
+        if(!notParse && input && typeof(input) === "string") {
             try {
                 input = JSON.parse(input);
             } catch(e) {
-                input = null;
-
                 this.lastError = e;
             }
         }
@@ -256,15 +254,13 @@ var zm = (function createInstance() {
         return this;
     }
 
-    function toArray() {
+    function toArray(notParse) {
         var input = this.value;
 
-        if(input && typeof(input) === "string") {
+        if(!notParse && input && typeof(input) === "string") {
             try {
                 input = JSON.parse(input);
             } catch(e) {
-                input = null;
-
                 this.lastError = e;
             }
         }

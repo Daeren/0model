@@ -71,8 +71,8 @@ zm("hello 2 world").to.string().then.remove(d => d.substr(2)) + "!";
 | date              | function                      |                                                                           |
 | symbol            | function                      |                                                                           |
 |                   | -                             |                                                                           |
-| table, hashTable  | function                      |                                                                           |
-| array             | function                      |                                                                           |
+| table, hashTable  | function(notParse)            |                                                                           |
+| array             | function(notParse)            |                                                                           |
 | json              | function                      |                                                                           |
 |                   | [M]                           |                                                                           |
 | remove            | function(t)                   | t: string, regEx (string), function(elem)                                 |

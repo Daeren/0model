@@ -105,6 +105,7 @@ describe("~", function() {
         expect(zm.get()).to.equal(13);
     });
 
+
     it("valueOf", function() {
         expect(rZm("6").to.int() + 7).to.equal(13);
     });
@@ -112,6 +113,7 @@ describe("~", function() {
     it("toString", function() {
         expect(rZm("6").to.int() + "7").to.equal("67");
     });
+
 
     it("boolean", function() {
         const zm = rZm();
@@ -211,6 +213,24 @@ describe("~", function() {
             if(!isNaN(a) && isNaN(b) || !isNaN(b)) {
                 expect(a).to.equal(b);
             }
+        }
+    });
+
+    it("array", function() {
+        test(rZm("[1,2]").array(true), []);
+        test(rZm("[1,2]").array(false), [1,2]);
+
+        function test(a, b) {
+            expect(a.get()).to.deep.equal(b);
+        }
+    });
+
+    it("table", function() {
+        test(rZm('{"x": 1}').table(true), {});
+        test(rZm('{"x": 1}').table(false), {x: 1});
+
+        function test(a, b) {
+            expect(a.get()).to.deep.equal(b);
         }
     });
 
