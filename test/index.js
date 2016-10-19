@@ -49,12 +49,16 @@ describe("Methods", function() {
         "int", "integer",
         "float", "number",
 
+        "table", "hashTable",
+
         "has", "have"
     ];
 
     [
         "date",
-        "hashTable",
+        "symbol",
+
+        "table",
         "array",
         "json",
 
@@ -231,8 +235,30 @@ describe("~", function() {
         test(null, null);
         test(undefined, null);
 
+        testEmpty({}, true);
+        testEmpty({x:1}, false);
+
         function test(a, b) {
             expect(zm.set(a).json().get()).to.deep.equal(b);
+        }
+
+        function testEmpty(a, b) {
+            expect(zm.set(a).empty()).to.equal(b);
+        }
+    });
+
+    it("symbol", function() {
+        const symX = Symbol("X");
+        const zmSymX = rZm("X").symbol();
+
+        const refSymX = rZm(symX).symbol();
+        const zmRefSymX = rZm(zmSymX).symbol();
+
+        test(symX, refSymX.valueOf());
+        test(zmSymX.valueOf(), zmRefSymX.valueOf());
+
+        function test(a, b) {
+            expect(a).to.equal(b);
         }
     });
 });

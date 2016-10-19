@@ -1,5 +1,3 @@
-[![Codacy][cod_b]][cod_l]
-
 `npm -g install 0model`
 
 * Coverage: +
@@ -21,18 +19,20 @@ Global var: `zm`
 var zm = require("0model");
 
 
-zm(data).string().get().trim();
-zm(data).to.int().it.is.required();
+zm(" D ").string().get().trim();            // <-- "D"
+zm(" 13.").to.int().it.is.required();       // <-- true
 
-zm({x: 1, y: 2}).to.have("x", "z");
+zm({x: 1, y: 2}).to.have("x", "z");         // <-- false
+zm({}).it.is.empty();                       // <-- true
 
 
-zm("[1,2]").to.json().get();
-zm("[1,").to.json().to.string().get();
-zm("[1,").json().string().get();
+zm("[1,2]").to.json().get();                // <-- [1, 2]
+zm("[1,").to.json().to.string().get();      // <-- ''
+zm("[1,").json().string().get();            // <-- ''
 
-zm(5.9).int().str() + 10;
-zm(5.9).to.integer() + " num";
+zm(5.9).int().str() + 10;                   // <-- '510'
+zm(5.9).to.integer() + " num";              // <-- '5 num'
+zm(zm('d0' / 1)).empty();                   // <-- true
 
 
 zm("hello 2 world").to.string().then.remove(/\d+/).it.is.required();
@@ -61,18 +61,19 @@ zm("hello 2 world").to.string().then.remove(d => d.substr(2)) + "!";
 | float, number     | function                      |                                                                           |
 |                   | -                             |                                                                           |
 | date              | function                      |                                                                           |
+| symbol            | function                      |                                                                           |
 |                   | -                             |                                                                           |
-| hashTable         | function                      |                                                                           |
+| table, hashTable  | function                      |                                                                           |
 | array             | function                      |                                                                           |
 | json              | function                      |                                                                           |
 |                   | [M]                           |                                                                           |
-| remove            | function(t)                   | t: string, regEx (string), function (custom)                              |
+| remove            | function(t)                   | t: string, regEx (string), function(elem)                                 |
 | abs               | function                      |                                                                           |
 | clamp             | function(min, max)            |                                                                           |
 |                   | [V]                           |                                                                           |
-| required          | function                      | not: NaN, [], null, undefined, "", Invalid Date                           |
-| empty             | function                      | if string not empty                                                       |
-| has, have         | function(...)                 | for: string, array, hashTable                                             |
+| required          | function                      | false: NaN, [], null, undefined, "", Invalid Date, {}                     |
+| empty             | function                      | true: NaN, [], null, undefined, "", Invalid Date, {}                      |
+| has, have         | function(...)                 | for: string, array, object                                                |
 
 
 
@@ -85,6 +86,3 @@ MIT
 
 
 [1]: http://666.io
-
-[cod_b]: https://img.shields.io/codacy/88b55f71c45a47838d24ed1e5fd2476c.svg
-[cod_l]: https://www.codacy.com/app/daeren/0model/dashboard

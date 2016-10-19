@@ -10,7 +10,10 @@ var zm = (function createInstance() {
 
     //-----------------------------------------------]>
 
-    var gReStrIsEmpty = /^[\s\t\r\n]*$/;
+    var gReStrIsEmpty   = /^[\s\t\r\n]*$/;
+
+    var gObjHas         = Object.prototype.hasOwnProperty,
+        gObjToStr       = Object.prototype.toString;
 
     //------------------------]>
 
@@ -20,7 +23,7 @@ var zm = (function createInstance() {
         this.is     = this;
         this.it     = this;
 
-        this.value  = v;
+        this.set(v);
     }
 
     CType.prototype = {};
@@ -38,8 +41,11 @@ var zm = (function createInstance() {
     CType.prototype.number  = toFloat;
 
     CType.prototype.date = toDate;
+    CType.prototype.symbol = toSymbol;
 
-    CType.prototype.hashTable = toHashTable;
+    CType.prototype.hashTable =
+    CType.prototype.table = toHashTable;
+
     CType.prototype.array = toArray;
     CType.prototype.json = toJson;
 
@@ -56,7 +62,7 @@ var zm = (function createInstance() {
     CType.prototype.have    = isHave;
 
 
-    CType.prototype.set = function(v) { this.value = v; return this; };
+    CType.prototype.set = function(v) { this.value = (v instanceof(CType) ? v.get() : v); return this; };
     CType.prototype.get = function() { return this.value; };
 
     CType.prototype.valueOf = function() { return this.value; };
@@ -111,8 +117,12 @@ var zm = (function createInstance() {
                     r = isNaN(input) ? "" : (input + "");
                     break;
 
+                case "symbol":
+                    r = input.toString();
+                    break;
+
                 default:
-                    r = typeof(input.toString) === "function" ? input.toString() : Object.prototype.toString.call(input);
+                    r = typeof(input.toString) === "function" ? input.toString() : gObjToStr.call(input);
             }
         }
 
@@ -191,6 +201,21 @@ var zm = (function createInstance() {
         }
         else {
             r = new Date(input);
+        }
+
+        this.value = r;
+
+        return this;
+    }
+
+    function toSymbol() {
+        var r, input = this.value;
+
+        if(input && typeof(input) === "symbol") {
+            r = input;
+        }
+        else {
+            r = Symbol(this.value);
         }
 
         this.value = r;
@@ -279,7 +304,7 @@ var zm = (function createInstance() {
                 break;
 
             case "object":
-                if(t instanceof RegExp) {
+                if(t instanceof(RegExp)) {
                     r = input.replace(t, "");
                 }
                 else {
@@ -316,8 +341,9 @@ var zm = (function createInstance() {
 
     function isRequired() {
         var input = this.value;
+        var type = typeof(input);
 
-        switch(typeof(input)) {
+        switch(type) {
             case "number":
                 return !isNaN(input);
 
@@ -332,6 +358,9 @@ var zm = (function createInstance() {
                     else if(input instanceof(Date)) {
                         return !!input.getTime();
                     }
+                    else if(type === "object") {
+                        return Object.keys(input).length > 0;
+                    }
                 }
         }
 
@@ -339,7 +368,15 @@ var zm = (function createInstance() {
     }
 
     function isEmpty() {
-        return !!this.value.match(gReStrIsEmpty);
+        var input = this.value;
+
+        switch(typeof(input)) {
+            case "string":
+                return input.length === 0 || !!input.match(gReStrIsEmpty);
+
+            default:
+                return !this.required();
+        }
     }
 
     function isHave() {
@@ -351,9 +388,10 @@ var zm = (function createInstance() {
 
         //---------]>
 
-        var argLen = arguments.length;
+        var argLen  = arguments.length;
+        var type    = typeof(input);
 
-        if(typeof(input) === "string" || Array.isArray(input)) {
+        if(type === "string" || Array.isArray(input)) {
             while(argLen--) {
                 if(input.indexOf(arguments[argLen]) === -1) {
                     return false;
@@ -365,17 +403,19 @@ var zm = (function createInstance() {
 
         //---------]>
 
-        var has = Object.prototype.hasOwnProperty;
-
-        while(argLen--) {
-            if(!has.call(input, arguments[argLen])) {
-                return false;
+        if(type === "object") {
+            while(argLen--) {
+                if(!gObjHas.call(input, arguments[argLen])) {
+                    return false;
+                }
             }
+
+            return true;
         }
 
         //---------]>
 
-        return true;
+        return false;
     }
 })();
 

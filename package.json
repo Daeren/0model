@@ -1,6 +1,6 @@
 {
     "name": "0model",
-    "version": "0.0.12",
+    "version": "0.1.0",
     "description": "Lightweight module for data control",
 
     "homepage": "https://666.io",
@@ -9,19 +9,19 @@
         "data",
         "justdoit"
     ],
-	
+    
     "author": {
         "name": "Daeren Torn",
         "email": "x@db.gg"
     },
 
-	"preferGlobal": "true",
-	
+    "preferGlobal": "true",
+    
     "main": "./index",
-	"scripts": {
-		"test": "mocha --reporter spec"
-	},
-	
+    "scripts": {
+        "test": "mocha --reporter spec"
+    },
+    
     "repository": {
         "type": "git",
         "url": "git://github.com/Daeren/0model.git"
@@ -31,7 +31,7 @@
     "engines": {
         "node": ">= 0.8.0"
     },
-	
+
     "readme": "",
     "readmeFilename": "readme.md",
 
