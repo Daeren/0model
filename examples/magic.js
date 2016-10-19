@@ -34,7 +34,7 @@ console.log(
 
 
 console.log(
-    "%s | %s %s | %s | %s | %s | %s",
+    "%s | %s | %s | %s | %s | %s",
 
     zm(-3.5).int().abs().get(),
     zm(3.5).float().abs().get(),

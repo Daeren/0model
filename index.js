@@ -277,25 +277,16 @@ var zm = (function createInstance() {
     function toJson(reviver) {
         var r       = null,
             input   = this.value,
-            inType  = typeof(input);
+            type    = typeof(input);
 
-        if(inType === "undefined" || inType === "number" && isNaN(input)) {
-            r = null;
-        }
-        else if(
-            !Array.isArray(input) &&
-            input && inType !== "object" &&
-            inType !== "number" &&
-            inType !== "boolean"
-        ) {
+        if(type === "string") {
             try {
-                r = JSON.parse(input, reviver); // <-- RFC 4627
+                r = input ? JSON.parse(input, reviver) : r; // <-- RFC 4627
             } catch(e) {
-                r = null;
-
                 this.lastError = e;
             }
-        } else {
+        }
+        else if(type !== "undefined" && type !== "symbol" && !(type === "number" && isNaN(input))) {
             r = input;
         }
 
