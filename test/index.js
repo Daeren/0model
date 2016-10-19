@@ -216,9 +216,13 @@ describe("~", function() {
 
     it("json", function() {
         const zm = rZm();
+        const date = new Date();
 
         test(true, true);
         test(false, false);
+
+        test(date === date.toString(), false);
+        test(date, JSON.stringify(date));
 
         test("true", true);
         test('"true"', "true");

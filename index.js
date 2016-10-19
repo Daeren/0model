@@ -286,6 +286,9 @@ var zm = (function createInstance() {
                 this.lastError = e;
             }
         }
+        else if(input && input instanceof(Date)) {
+            r = JSON.stringify(input);
+        }
         else if(type !== "undefined" && type !== "symbol" && !(type === "number" && isNaN(input))) {
             r = input;
         }
