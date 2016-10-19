@@ -62,7 +62,16 @@ var zm = (function createInstance() {
     CType.prototype.have    = isHave;
 
 
-    CType.prototype.set = function(v) { this.value = (v instanceof(CType) ? v.get() : v); return this; };
+    CType.prototype.set = function(v) {
+        if(typeof(v) === "function") {
+            return this.set(v(this.value));
+        }
+
+        this.value = (v instanceof(CType) ? v.get() : v);
+
+        return this;
+    };
+
     CType.prototype.get = function() { return this.value; };
 
     CType.prototype.valueOf = function() { return this.value; };

@@ -35,6 +35,10 @@ zm(5.9).to.integer() + " num";              // <-- '5 num'
 zm(zm('d0' / 1)).empty();                   // <-- true
 
 
+zm([1, 2, 3]).set(x => x.reduce((a, b) => a + b)).get();
+zm(3.14159).set(x => x.toFixed(0)).str().get();
+
+
 zm("hello 2 world").to.string().then.remove(/\d+/).it.is.required();
 zm("hello 2 world").to.string().then.remove(/\d+/).get();
 zm("hello 2 world").to.string().then.remove(d => d.substr(2)) + "!";
