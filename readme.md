@@ -1,3 +1,7 @@
+[![Codacy][cod_b]][cod_l]
+
+
+
 `npm -g install 0model`
 
 * Coverage: +
@@ -90,3 +94,7 @@ MIT
 
 
 [1]: http://666.io
+
+[cod_b]: https://img.shields.io/codacy/12d7cf4ff0b8466ca74cd504e689b779.svg
+[cod_l]: https://www.codacy.com/app/daeren/0model/dashboard
+
