@@ -143,6 +143,7 @@ var zm = (function createInstance() {
         }
 
         this.value = r;
+        this.length = r.length;
 
         return this;
     }
@@ -267,6 +268,7 @@ var zm = (function createInstance() {
         }
 
         this.value = input && Array.isArray(input) ? input : [];
+        this.length = this.value.length;
 
         return this;
     }

@@ -63,6 +63,7 @@ zm("hello 2 world").to.string().then.remove(d => d.substr(2)) + "!";
 |                   | -                             |                                                                           |
 | lastError         | -                             |                                                                           |
 | value             | -                             | current value                                                             |
+| length            | -                             | string(), array()                                                         |
 |                   | [T]                           |                                                                           |
 | bool, boolean     | function                      | (true, on, yes, 1) = true                                                 |
 | str, string       | function                      | (NaN, null, undefined, []) = ""                                           |

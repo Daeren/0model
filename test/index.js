@@ -160,6 +160,9 @@ describe("~", function() {
         test(null, "");
         test(undefined, "");
 
+        expect(rZm("test").length).to.equal(undefined);
+        expect(zm.set("test").str().length).to.equal(4);
+
         function test(a, b) {
             expect(zm.set(a).str().get()).to.equal(b);
         }
@@ -220,6 +223,9 @@ describe("~", function() {
     it("array", function() {
         test(rZm("[1,2]").array(true), []);
         test(rZm("[1,2]").array(false), [1,2]);
+
+        expect(rZm([1,2]).length).to.equal(undefined);
+        expect(rZm([1,2]).array().length).to.equal(2);
 
         function test(a, b) {
             expect(a.get()).to.deep.equal(b);
