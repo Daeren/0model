@@ -28,7 +28,7 @@ zm(" 13.").to.int().it.is.required();       // <-- true
 
 zm({x: 1, y: 2}).to.have("x", "z");         // <-- false
 zm({}).it.is.empty();                       // <-- true
-
+zm("hi").str().between(1, 16);              // <-- true
 
 zm("[1,2]").to.json().get();                // <-- [1, 2]
 zm("[1,").to.json().to.string().get();      // <-- ''
@@ -40,6 +40,7 @@ zm(zm('d0' / 1)).empty();                   // <-- true
 
 
 zm([1, 2, 3]).set(x => x.reduce((a, b) => a + b)).get(console.log);
+zm({x: 1, y: 2}).set(JSON.stringify).get(console.log);
 zm(3.14159).set(x => x.toFixed(0)).str().get(console.log);
 
 
@@ -81,7 +82,8 @@ zm("hello 2 world").to.string().then.remove(d => d.substr(2)) + "!";
 |                   | [V]                           |                                                                           |
 | required          | function                      | false: NaN, [], null, undefined, "", Invalid Date, {}                     |
 | empty             | function                      | true: NaN, [], null, undefined, "", Invalid Date, {}                      |
-| has, have         | function(...)                 | for: string, array, object                                                |
+| has, have         | function(...)                 | string, array, object                                                     |
+| between           | function(min, max)            | number, string, array, object, date, map                                  |
 
 
 

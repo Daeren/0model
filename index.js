@@ -18,48 +18,49 @@ var zm = (function createInstance() {
     //------------------------]>
 
     function CType(v) {
-        this.to     = this;
-        this.then   = this;
-        this.is     = this;
-        this.it     = this;
-
+        this.to = this.then = this.is = this.it = this;
         this.set(v);
     }
 
+
     CType.prototype = {};
 
-    CType.prototype.bool    =
-    CType.prototype.boolean = toBool;
 
-    CType.prototype.str     =
-    CType.prototype.string  = toStr;
+    CType.prototype.bool        =
+    CType.prototype.boolean     = toBool;
 
-    CType.prototype.int     =
-    CType.prototype.integer = toInt;
+    CType.prototype.str         =
+    CType.prototype.string      = toStr;
 
-    CType.prototype.float   =
-    CType.prototype.number  = toFloat;
+    CType.prototype.int         =
+    CType.prototype.integer     = toInt;
 
-    CType.prototype.date = toDate;
-    CType.prototype.symbol = toSymbol;
+    CType.prototype.float       =
+    CType.prototype.number      = toFloat;
 
-    CType.prototype.hashTable =
-    CType.prototype.table = toHashTable;
+    CType.prototype.date        = toDate;
+    CType.prototype.symbol      = toSymbol;
 
-    CType.prototype.array = toArray;
-    CType.prototype.json = toJson;
+    CType.prototype.hashTable   =
+    CType.prototype.table       = toHashTable;
 
-
-    CType.prototype.remove = modRemove;
-    CType.prototype.abs = modAbs;
-    CType.prototype.clamp = modClamp;
+    CType.prototype.array       = toArray;
+    CType.prototype.json        = toJson;
 
 
-    CType.prototype.required = isRequired;
-    CType.prototype.empty = isEmpty;
+    CType.prototype.remove      = modRemove;
+    CType.prototype.abs         = modAbs;
+    CType.prototype.clamp       = modClamp;
 
-    CType.prototype.has     =
-    CType.prototype.have    = isHave;
+
+    CType.prototype.required    = isRequired;
+    CType.prototype.empty       = isEmpty;
+
+    CType.prototype.has         =
+    CType.prototype.have        = isHave;
+
+
+    CType.prototype.between     = isBetween;
 
 
     CType.prototype.set = function(v) {
@@ -346,30 +347,14 @@ var zm = (function createInstance() {
 
     function isRequired() {
         var input = this.value;
-        var type = typeof(input);
 
-        switch(type) {
+        switch(typeof(input)) {
             case "number":
                 return !isNaN(input);
 
-            case "string":
-                return input.length > 0;
-
             default:
-                if(input) {
-                    if(Array.isArray(input)) {
-                        return input.length > 0;
-                    }
-                    else if(input instanceof(Date)) {
-                        return !!input.getTime();
-                    }
-                    else if(type === "object") {
-                        return Object.keys(input).length > 0;
-                    }
-                }
+                return this.between(1, Infinity);
         }
-
-        return false;
     }
 
     function isEmpty() {
@@ -377,7 +362,7 @@ var zm = (function createInstance() {
 
         switch(typeof(input)) {
             case "string":
-                return input.length === 0 || !!input.match(gReStrIsEmpty);
+                return !input.length || !!input.match(gReStrIsEmpty);
 
             default:
                 return !this.required();
@@ -421,6 +406,42 @@ var zm = (function createInstance() {
         //---------]>
 
         return false;
+    }
+
+    function isBetween(min, max) {
+        var input = this.value;
+        var type = typeof(input);
+
+        if(max <= min) {
+            throw new Error("isBetween(min, max) | max <= min");
+        }
+
+        switch(type) {
+            case "number":
+                break;
+
+            case "string":
+                input = input.length;
+                break;
+
+            default:
+                if(input) {
+                    if(Array.isArray(input)) {
+                        input = input.length;
+                    }
+                    else if(input instanceof(Date)) {
+                        input = input.getTime();
+                    }
+                    else if(input instanceof(Map)) {
+                        input = input.size();
+                    }
+                    else if(type === "object") {
+                        input = Object.keys(input).length;
+                    }
+                }
+        }
+
+        return !isNaN(input) && input >= min && input <= max;
     }
 })();
 

@@ -68,6 +68,7 @@ describe("Methods", function() {
 
         "required",
         "empty",
+        "between",
 
         "set",
         "get",
@@ -284,5 +285,29 @@ describe("~", function() {
         function test(a, b) {
             expect(a).to.equal(b);
         }
+    });
+
+
+    it("required", function() {
+        expect(rZm([1,2,3]).array().required()).to.equal(true);
+        expect(rZm(new Date()).date().required()).to.equal(true);
+        expect(rZm("6").int().required()).to.equal(true);
+        expect(rZm("6").string().required()).to.equal(true);
+
+        expect(rZm(new Date("test")).date().required()).to.equal(false);
+        expect(rZm("test").int().required()).to.equal(false);
+        expect(rZm("").string().required()).to.equal(false);
+    });
+
+    it("between", function() {
+        expect(rZm([1,2,3]).array().between(2, 4)).to.equal(true);
+        expect(rZm(new Date()).date().between(Date.now() - 10, Date.now() + 10)).to.equal(true);
+        expect(rZm("6").int().between(5, 7)).to.equal(true);
+        expect(rZm("6").string().between(1, 2)).to.equal(true);
+
+        expect(rZm("test").int().between(7, 8)).to.equal(false);
+        expect(rZm("6").int().between(7, 8)).to.equal(false);
+        expect(rZm("6").string().between(2, 3)).to.equal(false);
+        expect(rZm("").string().between(2, 3)).to.equal(false);
     });
 });
